@@ -1,0 +1,41 @@
+TODO: 
+
+	- Ajouter le facteur de concession qui sera en fonction du temps limité, de la nature des plans ainsi que les propoisitions des autres agents.
+
+
+Version : 0.4.2
+Pramètres : 	
+	- 08 stratégies d'ordonnancement des alternatives. 
+	- Amélioration de la relance sur les discussions (mais il y a toujours des problèmes à résoudre)
+	
+	
+Détails : 
+	- Version avec relancement 
+	- Les agents ne s'engagent pas avec un coût négatif.
+version DB : bd1
+Objectifs courants : 
+	- 	Ajouter une autre stratégie basée sur le nombre de bifurcation dans les alternatives des agents.
+	
+To Do :
+	- Enregistrer le round sur lequel une solution est trouvé
+	- Enregistrer la stratégie utilisée
+	- Enregistrer la distance sur la base de données
+	- Enregistrer les bifurcations sur la base de données.
+	- Revoir le relancement V2. (Relancer sans remise à zéro des listes)(En partie Fait)
+	- Relancer les discussion sur l'ensemble des alternatives possibles (Fait).
+	- Ajouter la prise en considération des temps de validités des acceptations (Fait).
+	- Ajouter une stratégie qui prendera en compte le degrée des actions (le degrée étant le nombre d'agent l'ayant sur leur plan) (En Partie Fait)
+	- Enregistrer les propositions des atres agents
+	
+	
+To Do 2 
+	- Calculer le gain estimé moyen par agent.	
+	- 
+	- 
+
+Perspectives : 
+	- Construire les réponse d'acceptation en fonction de la totalité des propositions reçues des agents.
+	- Utiliser la notion de distance pour selectionner l'alternative. Pas la distance par rapport au plan global, mais la distance par rapport aux propositions reçues.
+	- Donc, toutes les métriques des stratégies peuvent s'appliquer dans ce sense. Distance, cout, degré, bifurcation.... 
+	- Une npuvelle stratégie : calculer le degré des agents (le nombre d'action en commun), puis par ordre décroissant, choisir les alternatives qui comportes ces agents.
+	

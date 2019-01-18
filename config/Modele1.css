@@ -1,0 +1,169 @@
+
+graph {
+	fill-color: white;
+}
+
+node { 
+	size-mode: fit; 
+	shape: rounded-box; 
+	fill-color: aquamarine; 
+	stroke-mode: plain; 
+	padding: 3px, 2px;
+	size: 15px; 
+	}
+  
+node:clicked { 
+	fill-color: red;
+}
+
+node.goal{
+	fill-color: blue;
+}
+
+node.start{
+	fill-color: green;
+}
+
+node.negotiation{
+	fill-color: yellow;
+	size: 19px;
+}
+
+edge.Blue { 
+	fill-color: blue; 
+	} 
+
+edge.Orange { 
+	fill-color: orange; 
+	}
+
+edge.Green { 
+	fill-color: green; 
+	}
+
+edge.Red{ 
+	fill-color: red; 
+	}
+	
+edge.Yellow{ 
+	fill-color: yellow; 
+	}
+	
+edge.aquamarine{ 
+	fill-color: aquamarine; 
+	}
+	
+edge.Ruby{ 
+	fill-color: #c00155; 
+	}
+	
+edge.Salmon{ 
+	fill-color: #4e021c; 
+	}
+	
+edge.Purple{ 
+	fill-color: #dac719; 
+	}
+	
+edge.Plum{ 
+	fill-color: #c00155; 
+	}
+	
+edge.Pink{ 
+	fill-color: Pink; 
+	}
+	
+edge.Pear{ 
+	fill-color: #062e60; 
+	}
+	
+edge.Orchid{ 
+	fill-color: Orchid; 
+	}
+	
+edge.Olive{ 
+	fill-color: #7d7650; 
+	}
+	
+edge.Ocher{ 
+	fill-color: #239fed; 
+	}
+	
+edge.Magenta{ 
+	fill-color: Magenta; 
+	}
+	
+edge.Lime{ 
+	fill-color: #f0c814; 
+	}
+	
+edge.Lavender{ 
+	fill-color: #dd4b39; 
+	}
+
+edge.Jade{ 
+	fill-color: #384474; 
+	}
+
+edge.Cyan{ 
+	fill-color: Cyan; 
+	}
+
+edge.Coral{ 
+	fill-color: Coral; 
+	}
+
+edge.Chocolate{ 
+	fill-color: #ab9638; 
+	}
+
+edge.Champagne{ 
+	fill-color: Champagne; 
+	}
+
+edge.Blush{ 
+	fill-color: Blush; 
+	}
+
+edge.Bronze{ 
+	fill-color: Bronze; 
+	}
+
+edge.Initial{ 
+	fill-color: black; 
+	}
+
+edge.shared { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: #062e60;	
+	}
+
+edge.sharedNegotiation { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: green;
+	}
+
+edge.closedSharedNegotiation { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: red;
+	}
+
+edge.sharedFinalPath { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: green;
+	}
+
+edge.sharedFinalWithResumption { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: blue;
+	}
+	
+edge.finalBestEffeciency { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: blue;
+	}
+
+edge.confirmedFinalWithResumption { 
+	shape: angle; arrow-shape: none; size: 10px;
+	fill-color: black;
+	}

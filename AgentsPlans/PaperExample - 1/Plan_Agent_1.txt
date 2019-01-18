@@ -1,0 +1,8 @@
+A,I;15
+I,J;5
+A,D;5
+D,G;5
+G,I;5
+G,H;5
+H,J;5
+start,A

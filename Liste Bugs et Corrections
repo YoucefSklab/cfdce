@@ -1,0 +1,6 @@
+
+	- Listes des Bugs et corrections effectuées :
+	---------------------------------------------
+	
+- Bug : Blocage si un agent n'a aucune alternatives avec un coût estimé meilleure que la réalisation individuelle. Alors l'agent n'envoie aucune proposition.
+- Sol : si aucune alternative n'est potentiellement meilleure que la réalisation individuelle, l'agent ne participe pas dans les négociations. Mais comme les autres agents ne peuvent pas le sovoir, ils continuent à lui envoyer des propositions  
