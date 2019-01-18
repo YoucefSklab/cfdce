@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cfdce
+Bundle-SymbolicName: com.cf.cfdce
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: CF
+Automatic-Module-Name: com.cf.cfdce
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
