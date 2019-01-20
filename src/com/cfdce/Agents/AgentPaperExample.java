@@ -510,7 +510,7 @@ public class AgentPaperExample extends Agent {
 				}*/
 				
 				this.rootNode = planMgmt.getRoot(localPlan.graphPlan);
-				rootNode.addAttribute("oldLabel", rootNode.getAttribute("ui.label"));
+				rootNode.addAttribute("oldLabel", (String)  rootNode.getAttribute("ui.label"));
 				rootNode.setAttribute("ui.class", "negotiation");
 				
 				addPlanActionToList(localPlan.graphPlan); // ajout des actions du plan local � la liste globale des actions
@@ -5444,7 +5444,7 @@ public AID getAgentAIDfromString(String agent){
  */
 public void resetInitialRootLabel(){
 	if(colorSimulationTracking)
-	rootNode.setAttribute("ui.label", rootNode.getAttribute("oldLabel"));
+	rootNode.setAttribute("ui.label", (String) rootNode.getAttribute("oldLabel"));
 }
 
 /**

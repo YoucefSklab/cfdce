@@ -99,7 +99,7 @@ public class appercuPlan1 extends JFrame {
 				for(Edge ed:g2.getEachEdge()){
 					g.addEdge(ed.getId(), ed.getSourceNode().getId(), ed.getTargetNode().getId(), true );
 					
-					g.getEdge(ed.getId()).addAttribute("ui.class", ed.getAttribute("ui.class"));
+					g.getEdge(ed.getId()).addAttribute("ui.class", (String)  ed.getAttribute("ui.class"));
 					
 					g.getNode(ed.getSourceNode().getId()).addAttribute("ui.label", ed.getSourceNode().getId());
 					g.getNode(ed.getTargetNode().getId()).addAttribute("ui.label", ed.getTargetNode().getId());
@@ -266,7 +266,7 @@ public class appercuPlan1 extends JFrame {
 				}			
 				System.out.println("-----> Distance entre les plans : "+freq1);
 				
-				start2.setAttribute("ui.label", start2.getAttribute("ui.label")+" indice = "+freq1);
+				start2.setAttribute("ui.label", (String)  start2.getAttribute("ui.label")+" indice = "+freq1);
 		
 			
 				//---------------------------------------------------------------------------------
@@ -294,7 +294,7 @@ public class appercuPlan1 extends JFrame {
 					} // fin de for
 					if(!exist){
 						g.addEdge(ed1.getId(), ed1.getSourceNode().getId(), ed1.getTargetNode().getId(), true );
-						g.getEdge(ed1.getId()).addAttribute("ui.class", ed1.getAttribute("ui.class"));
+						g.getEdge(ed1.getId()).addAttribute("ui.class", (String)  ed1.getAttribute("ui.class"));
 						g.getNode(ed1.getSourceNode().getId()).addAttribute("ui.label", ed1.getSourceNode().getId());
 						g.getNode(ed1.getTargetNode().getId()).addAttribute("ui.label", ed1.getTargetNode().getId());
 					}
@@ -305,7 +305,7 @@ public class appercuPlan1 extends JFrame {
 				g.addEdge(newStart+secondNode, start.getId(), secondNode, true );
 				//g.getEdge(newStart+secondNode).addAttribute("ui.class", "shared");
 			
-				start2.setAttribute("ui.label", start2.getAttribute("ui.label")+" indice = "+freq1);
+				start2.setAttribute("ui.label", (String) start2.getAttribute("ui.label")+" indice = "+freq1);
 				indice.setText("Indice 1= "+freq1);
 				view.getCamera().resetView();
 				
@@ -491,7 +491,7 @@ public class appercuPlan1 extends JFrame {
 		for(Edge ed:g2.getEachEdge()){
 			g.addEdge(ed.getId(), ed.getSourceNode().getId(), ed.getTargetNode().getId(), true );
 			
-			g.getEdge(ed.getId()).addAttribute("ui.class", ed.getAttribute("ui.class"));
+			g.getEdge(ed.getId()).addAttribute("ui.class", (String)  ed.getAttribute("ui.class"));
 			
 			g.getNode(ed.getSourceNode().getId()).addAttribute("ui.label", ed.getSourceNode().getId());
 			g.getNode(ed.getTargetNode().getId()).addAttribute("ui.label", ed.getTargetNode().getId());

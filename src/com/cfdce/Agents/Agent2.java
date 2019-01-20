@@ -391,7 +391,7 @@ public class Agent2 extends Agent {
 			
 			
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(1000);
 				//Thread.sleep(wait);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -470,7 +470,7 @@ public class Agent2 extends Agent {
 				}
 				
 				//costLimitPercentage = 35;
-				System.out.println("---------------->   Case 2");
+				System.out.println( agNbr+ " ---------------->   Case 2");
 			}else { // cas d'une ex�cution par run
 					int agNbr = Integer.parseInt(((String) args[0]));
 					planSet pSet = new planSet();
@@ -509,7 +509,8 @@ public class Agent2 extends Agent {
 				}*/
 				
 				this.rootNode = planMgmt.getRoot(localPlan.graphPlan);
-				rootNode.addAttribute("oldLabel", rootNode.getAttribute("ui.label"));
+				System.out.println("Node ID: ---------->"+rootNode.getId());
+				rootNode.addAttribute("oldLabel", (String) rootNode.getAttribute("ui.label"));
 				rootNode.setAttribute("ui.class", "negotiation");
 				
 				addPlanActionToList(localPlan.graphPlan); // ajout des actions du plan local � la liste globale des actions
@@ -586,7 +587,9 @@ public class Agent2 extends Agent {
 				sd.setName("JADE-form-coalition");
 				dfd.addServices(sd);
 				try {
+					System.out.println("Agent registered"+this.getAID());
 					DFService.register(this, dfd);
+					
 				}
 				catch (FIPAException fe) {
 					fe.printStackTrace();
@@ -5430,7 +5433,7 @@ public AID getAgentAIDfromString(String agent){
  */
 public void resetInitialRootLabel(){
 	if(colorSimulationTracking)
-	rootNode.setAttribute("ui.label", rootNode.getAttribute("oldLabel"));
+	rootNode.setAttribute("ui.label", (String) rootNode.getAttribute("oldLabel"));
 }
 
 /**

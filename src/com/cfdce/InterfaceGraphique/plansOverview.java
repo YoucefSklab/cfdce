@@ -177,7 +177,7 @@ public class plansOverview extends JFrame {
 				if(!ed1.getSourceNode().getId().equals("start"))
 				if(!exist){
 					g.addEdge(ed1.getId(), ed1.getSourceNode().getId(), ed1.getTargetNode().getId(), true );
-					g.getEdge(ed1.getId()).addAttribute("ui.class", ed1.getAttribute("ui.class"));
+					g.getEdge(ed1.getId()).addAttribute("ui.class", (String)  ed1.getAttribute("ui.class"));
 					g.getNode(ed1.getSourceNode().getId()).addAttribute("ui.label", ed1.getSourceNode().getId());
 					g.getNode(ed1.getTargetNode().getId()).addAttribute("ui.label", ed1.getTargetNode().getId());
 				}

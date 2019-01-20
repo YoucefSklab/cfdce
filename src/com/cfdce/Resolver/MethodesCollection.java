@@ -1938,7 +1938,7 @@ public void	setTasksExclusiveTasks(ArrayList tasksList, ArrayList agentList){
 			
 			for( Edge ed : agent.plan.getEachEdge() ) {
 				ed.addAttribute("ui.class", "Initial");
-				ed.addAttribute("ui.label", ed.getAttribute("cost"));
+				ed.addAttribute("ui.label", (String)  ed.getAttribute("cost"));
 			}
 			
 
@@ -1956,7 +1956,7 @@ public void	setTasksExclusiveTasks(ArrayList tasksList, ArrayList agentList){
 					if (task.contains(ed2.getId())) {
 						ed2.addAttribute("ui.class", "finalBestEffeciency");
 						ed2.setAttribute("ui.label",
-								ed2.getAttribute("cost") + " : "
+								(String)  ed2.getAttribute("cost") + " : "
 										+ agent.bestCoalitionsAgents.get(i)
 												.toString()
 										+ " -> New Cost "

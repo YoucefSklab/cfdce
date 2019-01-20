@@ -231,7 +231,7 @@ public void printFailledNegotiation(int globalRound){
 	Node e = pM.getRoot(graphPlan);
 	e.setAttribute("ui.label", " ("+globalRound+") "+"_"+ agentOwner);
 		for(Edge e2:graphPlan.getEachEdge()) {
-			e2.addAttribute("ui.label", e2.getId()+" ("+e2.getAttribute("oldLabel")+")");
+			e2.addAttribute("ui.label", e2.getId()+" ("+ (String)  e2.getAttribute("oldLabel")+")");
 			e2.setAttribute("ui.class", "red");
 			e2.addAttribute("ui.style", "fill-color: red;");
 		} // fin de for

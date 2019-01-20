@@ -75,7 +75,7 @@ public class AgentModel {
 		
 	///	viewer = agentPlan.display();
 		rootNode = planMgmt.getRoot(plan);
-		rootNode.addAttribute("oldLabel", rootNode.getAttribute("ui.label"));
+		rootNode.addAttribute("oldLabel", (String) rootNode.getAttribute("ui.label"));
 		rootNode.addAttribute("label", plan.getId());
 	///	rootNode.setAttribute("ui.class", "negotiation");
 		planMgmt.agent = plan.getId();
@@ -97,7 +97,7 @@ public class AgentModel {
 		
 		//viewer = agentPlan.display();
 		rootNode = planMgmt.getRoot(plan);
-		rootNode.addAttribute("oldLabel", rootNode.getAttribute("ui.label"));
+		rootNode.addAttribute("oldLabel",  (String)  rootNode.getAttribute("ui.label"));
 		rootNode.addAttribute("label", plan.getId());
 	//	rootNode.setAttribute("ui.class", "negotiation");
 		planMgmt.agent = plan.getId();

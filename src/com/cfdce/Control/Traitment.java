@@ -2839,7 +2839,7 @@ public class Traitment {
 	public void allGraphEdgeInInitialColor(Graph g) {
 
 		for( Edge e2 : g.getEachEdge() ) {
-			e2.setAttribute("ui.label", e2.getAttribute("oldLabel"));
+			e2.setAttribute("ui.label", (String)  e2.getAttribute("oldLabel"));
 			e2.setAttribute("ui.class", "black");
 			e2.addAttribute("ui.style", "fill-color: black;");
 		}

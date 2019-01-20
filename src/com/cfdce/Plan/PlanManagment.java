@@ -186,17 +186,12 @@ public Coalition convertToCoalitionProposal(String agent,coalitionProposalMessag
 //----------------------------------------------------------
 //- collecter la tache debut  
 public Node getRoot(Graph g){
-			
-	Node root = null;
-	
 	for(Node n:g) {
 		if(n.getInDegree()==0){
-			root = n;
 			return n;
 		}
 	}
-	 
-	return root;
+	return null;
 } // fin de getRoot
 //----------------------------------------------------------
 

@@ -31,7 +31,7 @@ public Graph constructPlan(int planId) throws FileNotFoundException{
 	File f1 = new File("AgentsPlans/Plan_Agent_"+planId+".txt");
 	
 	if ( f1.exists() ) {
-		
+		System.out.println("Read the plan");
 		Scanner sc = new Scanner(f1);
 		while(sc.hasNextLine()){
 			String text = sc.nextLine();
@@ -105,9 +105,7 @@ public Graph constructPlan(int planId) throws FileNotFoundException{
 				}
 				
 				for(Edge e:Plan.getEachEdge()){
-					e.setAttribute("ui.label", e.getId()); 
-				//	System.out.println("-----------> Edge Label: "+e.getId());
-					
+					e.addAttribute("ui.label", e.getId()); 
 				}
 				
 		

@@ -457,7 +457,7 @@ public void minimalDisplayWithCosts(Discussion disc){
 					//e1.addAttribute("ui.class", "red");
 					e1.addAttribute("ui.style", "fill-color: red;");
 					e2.addAttribute("ui.style", "fill-color: red;");
-					e2.addAttribute("ui.label", this.getAcceptedProposalAgentStrList(e2.getId())+" ("+e2.getAttribute("ui.label")+")");
+					e2.addAttribute("ui.label", this.getAcceptedProposalAgentStrList(e2.getId())+" ("+(String) e2.getAttribute("ui.label")+")");
 				}
 			
 			} // fin de for
@@ -507,7 +507,7 @@ public void minimalDisplayWithCosts(Discussion disc){
 				if(e1.getId().equals(e2.getId())){
 					
 					//e2.addAttribute("ui.label", this.getConfirmedProposalAgentStrList(e2.getId())+" ("+e2.getAttribute("ui.label")+")");
-					e2.addAttribute("ui.label", this.getConfirmedProposalAgentStrList(e2.getId())+" ("+e2.getAttribute("oldLabel")+")");
+					e2.addAttribute("ui.label", this.getConfirmedProposalAgentStrList(e2.getId())+" ("+ (String) e2.getAttribute("oldLabel")+")");
 					
 					if(nbrAgent==0){
 						e2.setAttribute("ui.class", "green");
@@ -552,7 +552,7 @@ public void displayConfirmedFinalPathOnConsole(Graph g, int globalRound){
 			if(e1.getId().equals(e2.getId())){
 				System.out.println(" -- ");
 				System.out.println(" Action "+e2.getId());
-				System.out.println(" Les Co�ts : "+e2.getAttribute("ui.label"));
+				System.out.println(" Les Co�ts : "+ (String) e2.getAttribute("ui.label"));
 				System.out.println(" Coalition = "+this.getConfirmedProposalAgentStrList(e2.getId()));
 				}
 			} // fin de for
@@ -586,7 +586,7 @@ public void printPathInBlue(Graph g){
 		for(Edge e2:g.getEachEdge()) {
 			if(e1.getId().equals(e2.getId())){
 				
-				e2.setAttribute("ui.label", this.getInvolvedProposalAgentStrList(e2.getId())+" ("+e2.getAttribute("ui.label")+")");
+				e2.setAttribute("ui.label", this.getInvolvedProposalAgentStrList(e2.getId())+" ("+ (String) e2.getAttribute("ui.label")+")");
 				
 				if(nbrAgent==1){
 					e2.setAttribute("ui.class", "red");
@@ -616,7 +616,7 @@ public void printPathInBlue(Graph g){
 public void allGraphEdgeInInitialColor(Graph g){
 	
 	for(Edge e2:g.getEachEdge()) {
-		e2.setAttribute("ui.label", e2.getAttribute("oldLabel"));
+		e2.setAttribute("ui.label", (String)  e2.getAttribute("oldLabel"));
 		e2.setAttribute("ui.class", "black");
 		e2.addAttribute("ui.style", "fill-color: black;");
 	}
