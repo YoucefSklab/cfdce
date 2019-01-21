@@ -28,7 +28,8 @@ public class RunAgents {
 		agentController = agentContainer.createNewAgent("Agent2", "com.cfdce.Agents.Agent2", new Object[]{"Agent2", "2", "1000", "2", ""+0});
 		agentController.start();
 	*/
-		newContainerAgent();
+		int Tab[] = new int[] {2,6,8};
+		newContainerAgent(Tab);
 
 	
 	} // fin de main
@@ -59,7 +60,7 @@ public class RunAgents {
 	
 	
 	
-	public static void newContainerAgent() throws StaleProxyException{
+	public static void newContainerAgent(int Tab[]) throws StaleProxyException{
 		
 		Runtime runtime=Runtime.instance();
 		ProfileImpl profileImpl=new ProfileImpl(false);
@@ -67,8 +68,12 @@ public class RunAgents {
 		AgentContainer agentContainer=runtime.createAgentContainer(profileImpl);
 		AgentController agentController;
 		
-		for (int i = 1; i < 4; i++) {
-			agentController = agentContainer.createNewAgent("Agent"+i, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+i, ""+i, "1000", ""+i, ""+0});
+		agentController = agentContainer.createNewAgent("Ordonnanceur", "com.cfdce.Agents.Ordonnanceur", new Object[]{});
+		agentController.start();
+		
+		for (int i = 0; i < Tab.length; i++) {
+			int nbr = Tab[i];
+			agentController = agentContainer.createNewAgent("Agent"+nbr, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+nbr, ""+nbr, "1000", ""+nbr, ""+0});
 			agentController.start();
 		}
 	

@@ -588,7 +588,9 @@ public class Agent2 extends Agent {
 				dfd.addServices(sd);
 				try {
 					System.out.println("Agent registered"+this.getAID());
+					
 					DFService.register(this, dfd);
+					
 					
 				}
 				catch (FIPAException fe) {
