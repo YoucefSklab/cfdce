@@ -35,6 +35,35 @@ public class RunAgents {
 	
 	} // fin de main
 
+
+	
+	
+	
+	public static void newContainerAgent(int Tab[]) throws StaleProxyException{
+		
+		Runtime runtime=Runtime.instance();
+		ProfileImpl profileImpl=new ProfileImpl(false);
+		profileImpl.setParameter(ProfileImpl.MAIN_HOST,"localhost");
+		AgentContainer agentContainer=runtime.createAgentContainer(profileImpl);
+		AgentController agentController;
+		
+		agentController = agentContainer.createNewAgent("Ordonnanceur", "com.cfdce.Agents.Ordonnanceur", new Object[]{});
+		agentController.start();
+		
+		for (int i = 0; i < Tab.length; i++) {
+			int nbr = Tab[i];
+			agentController = agentContainer.createNewAgent("Agent"+nbr, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+nbr, ""+nbr, "1000", ""+nbr, ""+0});
+			agentController.start();
+		}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public static void newAgent(String agentName, int agNbr) throws InterruptedException, StaleProxyException {
 		try {
@@ -57,26 +86,5 @@ public class RunAgents {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
-	public static void newContainerAgent(int Tab[]) throws StaleProxyException{
-		
-		Runtime runtime=Runtime.instance();
-		ProfileImpl profileImpl=new ProfileImpl(false);
-		profileImpl.setParameter(ProfileImpl.MAIN_HOST,"localhost");
-		AgentContainer agentContainer=runtime.createAgentContainer(profileImpl);
-		AgentController agentController;
-		
-		agentController = agentContainer.createNewAgent("Ordonnanceur", "com.cfdce.Agents.Ordonnanceur", new Object[]{});
-		agentController.start();
-		
-		for (int i = 0; i < Tab.length; i++) {
-			int nbr = Tab[i];
-			agentController = agentContainer.createNewAgent("Agent"+nbr, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+nbr, ""+nbr, "1000", ""+nbr, ""+0});
-			agentController.start();
-		}
-	
 	}
 }
