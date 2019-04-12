@@ -22,7 +22,10 @@ public class RunAgents {
 	public static String classPath = "target.classes.com.cfdce";
 	
 	public static int costLimitPercentage = 100;
-	public static int maxRound = 9;
+	public static int maxRound = 3;
+	
+	
+	
 	
 	public static void main(String args[]) throws InterruptedException, StaleProxyException {
 	
@@ -61,15 +64,16 @@ public class RunAgents {
 		Runtime runtimeAgentsCreator=Runtime.instance();
 		ProfileImpl profileImplAgentsCreator=new ProfileImpl(false);
 		profileImplAgentsCreator.setParameter(ProfileImpl.MAIN_HOST,"localhost");
-		AgentContainer agentContainerAgentsCreator=runtimeAgentsCreator.createAgentContainer(profileImplAgentsCreator);
+		AgentContainer agentContainerAgentsCreator=runtimeAgentsCreator.createAgentContainer(profileImplAgentsCreator); 
 		AgentController agentControllerAgentsCreator;
-		
 		agentControllerAgentsCreator = agentContainerAgentsCreator.createNewAgent("AgentsCreator", "com.cfdce.Agents.AgentsCreator", new Object[]{});
 		agentControllerAgentsCreator.start();
 		
 		File f = new File("config/GlobalStep.txt");
 		Scanner sc;
 		int globalStep = 1;
+		
+		
 		try {
 			sc = new Scanner(f);
 			globalStep =  sc.nextInt();
