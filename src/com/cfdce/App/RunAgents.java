@@ -12,9 +12,10 @@ import jade.wrapper.StaleProxyException;
 public class RunAgents {
 
 	private static Process pro;
-	public static String jadePathOld = "/Users/sklab/git/ocfa/bin/jade.jar";
-	public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
-	public static String classPathOld = "Users.sklab.GamaCloudWorkigDirectory.EclipseOxy3A.GamaFrom09-18.cfdce.target.classes.com.cfdce";
+	//public static String jadePathOld = "/Users/sklab/git/ocfa/bin/jade.jar";
+	//public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
+	public static String jadePath = "/Utilisateurs/djo/git/cfdce/jade.jar";
+	//public static String classPathOld = "Users.sklab.GamaCloudWorkigDirectory.EclipseOxy3A.GamaFrom09-18.cfdce.target.classes.com.cfdce";
 	public static String classPath = "target.classes.com.cfdce";
 	
 	public static void main(String args[]) throws InterruptedException, StaleProxyException {
