@@ -7,8 +7,8 @@ import java.io.IOException;
 public class RunJade {
 	
 	public static String jadePathOld = "/Users/sklab/git/ocfa/bin/jade.jar";
-	//public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
-	public static String jadePath = "/Users/djo/git/cfdce/jade.jar";
+	public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
+	//public static String jadePath = "/Users/djo/git/cfdce/jade.jar";
 
 	public RunJade() {
 		

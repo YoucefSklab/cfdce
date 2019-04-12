@@ -238,8 +238,8 @@ public class Agent2 extends Agent {
 		// valorisationSendFrequency (sf) ; // valeur du nombre d'envoie des propositions.
 		public int discToSend = 0;//7; // L'identificateur de la discussion � envoyer. Si 0, alors envoyer celle selectionn�e par l'algorithme. si >0 alors envoy�e celle discToSend
 		private int totalAgent = 2;
-		private int maxRound = 60;  // nombre max de round � ex�cuter 
-		private float costLimitPercentage = 60;
+		private int maxRound = 10;  // nombre max de round � ex�cuter 
+		private float costLimitPercentage = 90;
 		
 		private int nbrAgentsInSystem = 0; // total des agents dans le syst�me. Premi�re instance du processus uniquement.
 		//private int GlobalStep = 41;  // l'etape globale  //12-1-2-3-6-7-15-19-25-32-33
@@ -282,7 +282,7 @@ public class Agent2 extends Agent {
 			
 		private boolean updateDB = false; // si mise � jour sur base de donn�es.
 		private boolean sysExit = false; // si quitter le syst�me apr�s FC
-		private boolean displayComment = false; // si affichage des param�tres de la classe Constants
+		private boolean displayComment = true; // si affichage des param�tres de la classe Constants
 		private boolean printOnLogFile = true; // Si sauvegarde du Log sur un fichier.
 		private boolean budgetLimit = true; // Si le bud0.get est limit�
 		private boolean isActionRandomCost = false; // si le co�t des actions est g�n�r� de mani�re al�atoire.
@@ -292,8 +292,7 @@ public class Agent2 extends Agent {
 		private boolean reorderDiscussionByState = true; // r�ordonner la liste des doscussion pour chaque �tat ou juste au moment de la formation initiale.
 		private boolean reorderDiscussionByState2 = true; // R�ordonner en fonction des couts
 		private boolean preCoalition = true; // si les agents se comporteront avec une strat�gie de preCoalition pour forcer les autres a converger...
-		
-		
+			
 		
 		private boolean colorSimulationTracking = true;
 		
@@ -439,6 +438,16 @@ public class Agent2 extends Agent {
 				e.printStackTrace();
 			}
 			
+			// Afficher le Log sur un fichier Log
+			//-----------------------------------------
+			if(printOnLogFile){
+				PrintStream out = null;
+				try { out = new PrintStream(new FileOutputStream("logs/"+GlobalStep+"_"+this.getLocalName()+"_Log.txt"));
+					} catch (FileNotFoundException e2) { e2.printStackTrace();}
+				System.setOut(out);
+			}
+			//-----------------------------------------
+			
 			// connection � la base de donn�es
 			//db.Connect();
 			
@@ -465,12 +474,16 @@ public class Agent2 extends Agent {
 				
 				existPanel =  Integer.parseInt(((String) args[4]));
 				
+				maxRound = Integer.parseInt(((String) args[5]));
+				
+				GlobalStep = Integer.parseInt(((String) args[6]));
+				
 				if(existPanel == 1){ 
 					panel = (JPanel) args[5];
 				}
 				
 				//costLimitPercentage = 35;
-				System.out.println( agNbr+ " ---------------->   Case 2");
+				System.out.println( agNbr+ " ---------------->   Case 2   maxRound is "+maxRound);
 			}else { // cas d'une ex�cution par run
 					int agNbr = Integer.parseInt(((String) args[0]));
 					planSet pSet = new planSet();
@@ -605,15 +618,7 @@ public class Agent2 extends Agent {
 				
 			
 				
-				// Afficher le Log sur un fichier Log
-				//-----------------------------------------
-				if(printOnLogFile){
-					PrintStream out = null;
-					try { out = new PrintStream(new FileOutputStream("logs/"+GlobalStep+"_"+this.getLocalName()+"_Log.txt"));
-						} catch (FileNotFoundException e2) { e2.printStackTrace();}
-					System.setOut(out);
-				}
-				//-----------------------------------------
+				
 				
 				System.out.println("The total number of alternatives in my local plan is "+allPaths.size() );
 				//planMgmt.displayAlternatives(allPaths, 2);
@@ -4140,7 +4145,7 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 	//	Viewer viewer = localPlan.graphPlan.display();
 				
 		if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
-			System.exit(0);
+			//System.exit(0);
 			viewer.close();
 			myAgent.doDelete();
 		} 	
@@ -4520,9 +4525,9 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 			DFService.deregister(myAgent);
 			
 			if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
-				System.exit(0);
+				//System.exit(0);
 				viewer.close();
-				myAgent.doDelete();
+				 myAgent.doDelete();
 			} 
 			
 			// ----------------------------
@@ -4537,7 +4542,7 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 			//-----------------------------
 			
 //			System.exit(0);
-			myAgent.doSuspend();
+//			myAgent.doSuspend();
 		
 			
 			

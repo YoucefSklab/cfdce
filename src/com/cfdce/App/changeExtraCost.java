@@ -1,4 +1,4 @@
-package com.cfdce.Plan;
+package com.cfdce.App;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,9 +21,14 @@ public class changeExtraCost {
 		agentList.add("Plan_Agent_2.txt");
 		agentList.add("Plan_Agent_3.txt");
 		agentList.add("Plan_Agent_4.txt");
+		agentList.add("Plan_Agent_5.txt");
+		agentList.add("Plan_Agent_6.txt");
+		agentList.add("Plan_Agent_7.txt");
+		agentList.add("Plan_Agent_8.txt");
+		agentList.add("Plan_Agent_9.txt");
 		//agentList.add("Plan_Agent_5.txt");
 
-		for( int i = 1; i < 5; i++ ) {
+		for( int i = 1; i < 11; i++ ) {
 			String fichier = "Plan_Agent_" + i + ".txt";
 			System.out.println("The file: " + fichier);
 			File f1 = new File("AgentsPlans/" + fichier);
@@ -73,13 +78,14 @@ public class changeExtraCost {
 					}
 
 					if (!escape) {
-						if (!N1.equals("start")) {
-							taskList.add(N1 + "," + N2 + ";" + ThreadLocalRandom
-							        .current().nextInt(10, 30));
-						}
-						else {
-							taskList.add(N1 + "," + N2);
-						}
+					//	if (!N1.equals("start")) {
+						String tasksLine = N1 + "," + N2 + ";" + ThreadLocalRandom.current().nextInt(20, 60);
+							taskList.add(tasksLine);
+							System.out.println("The tasks string line is: "+tasksLine);
+					//	}
+					//	else {
+					//		taskList.add(N1 + "," + N2);
+					//	}
 
 					}
 					else {
@@ -96,11 +102,14 @@ public class changeExtraCost {
 					e1.printStackTrace();
 				}
 
-				for( int j = 0; j < taskList.size() - 1; j++ ) {
+				for( int j = 0; j < taskList.size(); j++ ) {
 					String task = (String) taskList.get(j);
 					f.println(task);
 				}
-
+				
+				
+				
+				/*
 				if (taskNbr != 0) {
 					String task = (String) taskList.get(taskList.size() - 1);
 					String task2 = "";
@@ -118,6 +127,7 @@ public class changeExtraCost {
 					}
 					f.println(task2);
 				}
+				*/
 
 				f.close();
 

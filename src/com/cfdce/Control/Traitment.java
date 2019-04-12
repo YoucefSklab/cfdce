@@ -3018,8 +3018,8 @@ public class Traitment {
 
 		for( Edge e : agentPlan.getEachEdge() ) {
 			if (e.getId().equals(actName)) {
-				//return Integer.parseInt((String) e.getAttribute("extraCost"));
-				return 2;
+				return Integer.parseInt((String) e.getAttribute("extraCost"));
+				//return 2;
 			}
 		}
 

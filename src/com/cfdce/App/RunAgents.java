@@ -1,7 +1,10 @@
 package com.cfdce.App;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -13,10 +16,13 @@ public class RunAgents {
 
 	private static Process pro;
 	//public static String jadePathOld = "/Users/sklab/git/ocfa/bin/jade.jar";
-	//public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
-	public static String jadePath = "/Utilisateurs/djo/git/cfdce/jade.jar";
+	public static String jadePath = "/Users/sklab/GamaCloudWorkigDirectory/EclipseOxy3A/GamaFrom09-18/cfdce/jade.jar";
+	//public static String jadePath = "/Utilisateurs/djo/git/cfdce/jade.jar";
 	//public static String classPathOld = "Users.sklab.GamaCloudWorkigDirectory.EclipseOxy3A.GamaFrom09-18.cfdce.target.classes.com.cfdce";
 	public static String classPath = "target.classes.com.cfdce";
+	
+	public static int costLimitPercentage = 100;
+	public static int maxRound = 9;
 	
 	public static void main(String args[]) throws InterruptedException, StaleProxyException {
 	
@@ -29,7 +35,7 @@ public class RunAgents {
 		agentController = agentContainer.createNewAgent("Agent2", "com.cfdce.Agents.Agent2", new Object[]{"Agent2", "2", "1000", "2", ""+0});
 		agentController.start();
 	*/
-		int Tab[] = new int[] {2,6,8};
+		int Tab[] = new int[] {1,2,3};
 		newContainerAgent(Tab);
 
 	
@@ -40,7 +46,7 @@ public class RunAgents {
 	
 	
 	public static void newContainerAgent(int Tab[]) throws StaleProxyException{
-		
+		/*
 		Runtime runtime=Runtime.instance();
 		ProfileImpl profileImpl=new ProfileImpl(false);
 		profileImpl.setParameter(ProfileImpl.MAIN_HOST,"localhost");
@@ -49,11 +55,36 @@ public class RunAgents {
 		
 		agentController = agentContainer.createNewAgent("Ordonnanceur", "com.cfdce.Agents.Ordonnanceur", new Object[]{});
 		agentController.start();
+		*/
+		
+		
+		Runtime runtimeAgentsCreator=Runtime.instance();
+		ProfileImpl profileImplAgentsCreator=new ProfileImpl(false);
+		profileImplAgentsCreator.setParameter(ProfileImpl.MAIN_HOST,"localhost");
+		AgentContainer agentContainerAgentsCreator=runtimeAgentsCreator.createAgentContainer(profileImplAgentsCreator);
+		AgentController agentControllerAgentsCreator;
+		
+		agentControllerAgentsCreator = agentContainerAgentsCreator.createNewAgent("AgentsCreator", "com.cfdce.Agents.AgentsCreator", new Object[]{});
+		agentControllerAgentsCreator.start();
+		
+		File f = new File("config/GlobalStep.txt");
+		Scanner sc;
+		int globalStep = 1;
+		try {
+			sc = new Scanner(f);
+			globalStep =  sc.nextInt();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		
 		
 		for (int i = 0; i < Tab.length; i++) {
 			int nbr = Tab[i];
-			agentController = agentContainer.createNewAgent("Agent"+nbr, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+nbr, ""+nbr, "1000", ""+nbr, ""+0});
-			agentController.start();
+			agentControllerAgentsCreator = agentContainerAgentsCreator.createNewAgent("Agent"+nbr, "com.cfdce.Agents.Agent2", new Object[]{"Agent"+nbr, ""+nbr, "1000", 
+					""+costLimitPercentage, ""+0, ""+maxRound, ""+globalStep});
+			agentControllerAgentsCreator.start();
 		}
 	
 	}

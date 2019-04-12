@@ -91,7 +91,7 @@ public Graph constructPlan(int planId) throws FileNotFoundException{
 					Plan.addEdge(N1+N2+"", N1, N2, true ); 
 					//Plan.addEdge(N1+N2+"", N1, N2); 
 					
-					//System.out.println("++++++++> Adding edge: "+N1+N2+"");
+					System.out.println("++++++++> Adding edge: "+N1+N2+"    with the extra cost "+costV);
 					
 					Edge e = Plan.getEdge(N1+N2+"");
 					e.addAttribute("extraCost", "0"+costV);

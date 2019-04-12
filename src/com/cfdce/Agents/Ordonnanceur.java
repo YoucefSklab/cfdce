@@ -123,7 +123,9 @@ public class Ordonnanceur extends Agent {
 	
 		public void action() {
 					
-					
+		String[] tab =  getAgentsInSystem(this.getAgent());
+		//System.out.println("Total agent in the system is "+tab.length);
+		step++;		
 		switch (step) {
 					
 		//----------------------------------------------------------------------------------------------------------------------
