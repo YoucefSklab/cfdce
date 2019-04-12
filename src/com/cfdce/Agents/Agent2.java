@@ -281,7 +281,7 @@ public class Agent2 extends Agent {
 		private float discLostGaint = -1;        
 			
 		private boolean updateDB = false; // si mise � jour sur base de donn�es.
-		private boolean sysExit = false; // si quitter le syst�me apr�s FC
+		private boolean sysExit = true; // si quitter le syst�me apr�s FC
 		private boolean displayComment = true; // si affichage des param�tres de la classe Constants
 		private boolean printOnLogFile = true; // Si sauvegarde du Log sur un fichier.
 		private boolean budgetLimit = true; // Si le bud0.get est limit�
@@ -4146,8 +4146,8 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 				
 		if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
 			//System.exit(0);
-			viewer.close();
 			myAgent.doDelete();
+			//viewer.close();
 		} 	
 		
 		
@@ -4524,10 +4524,12 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 			
 			DFService.deregister(myAgent);
 			
+			
 			if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
 				//System.exit(0);
-				viewer.close();
 				 myAgent.doDelete();
+				//viewer.close();
+				
 			} 
 			
 			// ----------------------------

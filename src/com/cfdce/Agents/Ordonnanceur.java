@@ -91,8 +91,8 @@ public class Ordonnanceur extends Agent {
 			DFAgentDescription dfd = new DFAgentDescription();
 				dfd.setName(getAID());
 				ServiceDescription sd = new ServiceDescription();
-				sd.setType("form-coalition");
-				sd.setName("JADE-form-coalition");
+				sd.setType("form-coalition-Ordonnanceur");
+				sd.setName("JADE-form-coalition-Ordonnanceur");
 				dfd.addServices(sd);
 				try {
 					System.out.println("Agent registered"+this.getAID());
@@ -122,7 +122,23 @@ public class Ordonnanceur extends Agent {
 		addBehaviour(new CyclicBehaviour(this) {
 	
 		public void action() {
-					
+		
+		//myAgent.doSuspend();
+		
+		try {
+				Thread.sleep(1000);
+				DFService.deregister(myAgent);
+				myAgent.doDelete();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FIPAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+			
 		String[] tab =  getAgentsInSystem(this.getAgent());
 		//System.out.println("Total agent in the system is "+tab.length);
 		step++;		
