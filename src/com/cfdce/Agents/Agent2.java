@@ -388,6 +388,8 @@ public class Agent2 extends Agent {
 		// Put agent initializations here
 		protected void setup() {
 			
+			try {
+				writeStatut(1); } catch (IOException e5) { e5.printStackTrace(); }
 			
 			try {
 				Thread.sleep(1000);
@@ -4138,7 +4140,7 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 		// Affichage de l'�tat de validit� des coalitions
 		//	Tr.displayCoalitionsAcceptValidity(discussionList);
 		//	if(Ct.isSolutionFound)
-		DFService.deregister(myAgent);
+		 DFService.deregister(myAgent);
 		
 		
 		//Thread.sleep(90000);
@@ -4146,8 +4148,14 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 				
 		if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
 			//System.exit(0);
-			myAgent.doDelete();
+			//myAgent.doDelete();
 			//viewer.close();
+			try {
+				writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+			
+			//this.takeDown();
+			//this.doDelete();
+			this.doSuspend();
 		} 	
 		
 		
@@ -4527,8 +4535,15 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 			
 			if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
 				//System.exit(0);
-				 myAgent.doDelete();
+				// myAgent.doDelete();
+				//this.takeDown();
+				//this.doDelete();
 				//viewer.close();
+				
+				try {
+					writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+				
+				this.doSuspend();
 				
 			} 
 			
@@ -5939,6 +5954,19 @@ public void updateForResumption() throws IOException{
 
 
 }
+
+
+
+public void  writeStatut(int st) throws IOException{
+	File statutFile = new File("logs/"+this.getLocalName()+".txt"); 
+	PrintWriter f = new PrintWriter(new FileWriter(statutFile));
+	f.write(st);
+	f.write(1);
+	f.write(1);
+	f.write(1);
+	f.write(1);
+	f.close();
+} 
 
 } // Fin de classe. 
 
