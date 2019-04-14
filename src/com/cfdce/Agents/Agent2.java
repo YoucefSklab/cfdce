@@ -283,7 +283,7 @@ public class Agent2 extends Agent {
 		private boolean updateDB = false; // si mise � jour sur base de donn�es.
 		private boolean sysExit = true; // si quitter le syst�me apr�s FC
 		private boolean displayComment = true; // si affichage des param�tres de la classe Constants
-		private boolean printOnLogFile = true; // Si sauvegarde du Log sur un fichier.
+		private boolean printOnLogFile = false; // Si sauvegarde du Log sur un fichier.
 		private boolean budgetLimit = true; // Si le bud0.get est limit�
 		private boolean isActionRandomCost = false; // si le co�t des actions est g�n�r� de mani�re al�atoire.
 		private boolean isActionWithExtraCost = true; // si le co�t des actions est g�n�r� avec un cout extra.
@@ -308,6 +308,7 @@ public class Agent2 extends Agent {
 		private float percentageRate = (float) 0.5; 	// indice d'augmentation du  costLimitPercentage
 		private int GlobalStep = 2;  // l etape globale  //12-1-2-3-6-7-15-19-25-32-33
 	
+		private String prefix ="";
 		private int globalRound = 1;  // le round global du processus de formation de coalitions
 		
 		private int StepNbr = 0;  // le Nbr de l'exp�rience en cours
@@ -440,15 +441,7 @@ public class Agent2 extends Agent {
 				e.printStackTrace();
 			}
 			
-			// Afficher le Log sur un fichier Log
-			//-----------------------------------------
-			if(printOnLogFile){
-				PrintStream out = null;
-				try { out = new PrintStream(new FileOutputStream("logs/"+GlobalStep+"_"+this.getLocalName()+"_Log.txt"));
-					} catch (FileNotFoundException e2) { e2.printStackTrace();}
-				System.setOut(out);
-			}
-			//-----------------------------------------
+		
 			
 			// connection � la base de donn�es
 			//db.Connect();
@@ -480,6 +473,8 @@ public class Agent2 extends Agent {
 				
 				GlobalStep = Integer.parseInt(((String) args[6]));
 				
+				prefix = (String) args[7];
+				
 				if(existPanel == 1){ 
 					panel = (JPanel) args[5];
 				}
@@ -501,13 +496,21 @@ public class Agent2 extends Agent {
 					System.out.println("---------------->   Case 3");
 				}
 			
-					
+				// Afficher le Log sur un fichier Log
+				//-----------------------------------------
+				if(printOnLogFile){
+					PrintStream out = null;
+					try { out = new PrintStream(new FileOutputStream("logs/"+prefix+"_"+GlobalStep+"_"+this.getLocalName()+"_Log.txt"));
+						} catch (FileNotFoundException e2) { e2.printStackTrace();}
+					System.setOut(out);
+				}
+					//-----------------------------------------
 			
 						
 				localPlan.agentOwner = 	this.getAID().getLocalName();
 				
 				//fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalDiscussionNbr+"_discussionsProbability.txt");
-				fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
+				fileDiscussionProbability = new File("logs/"+prefix+"_"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
 			
 				
 				// Ecraser l'ancien fichier pour r�initiliser l'ecriture. 
@@ -1383,6 +1386,7 @@ private void sendAllProposalsForAlternative(Agent myAgent) throws IOException{
 	
 	if(globalNegotiationRound < maxRound){
 		globalNegotiationRound++;
+		writeRound(globalNegotiationRound);
 	}
 	
 if(globalNegotiationRound < maxRound){
@@ -3800,46 +3804,9 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 		if((Ct.currentAlternativeSent>=0) && (discussionList.size()>=1)) {
 			if(Ct.isSolutionFound){	
 					Discussion disc = (Discussion) discussionList.get(Ct.currentAlternativeSent);
-				//	System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
-					//disc.printAcceptedPathOnInitialPlan(localPlan.graphPlan, globalRound);
-					
 					
 					disc.printConfirmedFinalPathOnInitialPlan(localPlan.graphPlan, Ct.currentAlternativeSent);
-					
-					
-					
-					
-				//	disc.computeDiscussionParameters(receivedProposals, discussionList ,localPlan.graphPlan);
-				//	disc.computeInvolvedAgentsPathsList(agentsPlansList);
-				//	disc.computeMostInvolvedAlternativesList(agentsPlansList);
-				//	disc.countInvolvedAlternativesNodesByAgent(agentsPlansList);
-				//	disc.computeTotalBifurcationNodesList(agentsPlansList);
-					
-				//	disc.displayInvolvedAlternatives(agentsPlansList);
-				//	disc.displayNumberInvolvedAlternatives(agentsPlansList);
-				//	disc.displayMostInvolvedAlternativesList(agentsPlansList);
-					
-					
-					
-				//	System.out.println(" ========================================================");
-				//	System.out.println(" involvedAgentsList siez : "+disc.involvedAgentsList.size());
-				//	System.out.println(" countInvolvedAlternativesByAgentList : "+disc.countInvolvedAlternativesByAgentList.size());
-				//	System.out.println(" involvedAgentsPathsListInTables : "+disc.involvedAgentsPathsListInTables.size());
-				//	System.out.println(" ========================================================");
-					
-				//	disc.displayInvolvedAlternativesNodesAndEdgesByAgent(agentsPlansList);
-				//	disc.displayBifurcationNodesListByAgentByAlternative(agentsPlansList);
-				//	disc.displayTotalBifurcationNodesPerAgentList(agentsPlansList);
-					
-					
-		
-					
-					
-				//	disc.displayDiscussionParametersByAgent(localPlan, agentsPlansList);
-					
-				//	disc.displayDistanceToInvolvedAlternatives(agentsPlansList);
-					
-				//	disc.displayDiscussionParameters();
+				
 					disc.putDiscussionParametersInHashTable(Ct);
 	
 					
@@ -3887,45 +3854,10 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 					indiGainedCost = Ct.referenceCost - disc.discussionFinalCost;
 					discLostGaint =    disc.discussionFinalCost - disc.discussionEstimatedCost;
 							
-			//	Ct.discussionParameter.put(Ct.GlobalStep, Integer.toString(this.GlobalStep));
-			//	Ct.discussionParameter.put(Ct.StepNbr, Integer.toString(this.StepNbr));
-			//	Ct.discussionParameter.put(Ct.OrderingStrategy, Integer.toString(this.orderingStrategy));
-			//	Ct.discussionParameter.put(Ct.Round, Integer.toString(globalRound));
-			//	Ct.discussionParameter.put(Ct.TotalTaskInSystem, Integer.toString(this.totalActionsList.size()));
-			//	Ct.discussionParameter.put(Ct.TotalTaskInstances, Integer.toString(Tr.getTotalTaskInstances(totalLocalActionsInstances)));
-				
-				// insertion des valeurs dans la base de donn�es
-				// Insertion des valeurs Globals
-			//	if(updateDB) 
-			//	db.addNewRow("discussionParameters", Ct.getDiscussionParameterInTableField(), Ct.getDiscussionParameterInTableValue());
-		
-					
-			//TODO � revoir si n�cessit� de garder la capture du plan ou pas !!
-			//	localPlan.graphPlan.addAttribute("ui.screenshot", "images/plan_"+myAgent.getLocalName()+".png");
-				
-				// Insertion des valeurs propres � chaque agents :
-			//	if(updateDB)
-			//	disc.putDiscussionParametersByAgentInDataBase(localPlan, agentsPlansList, Ct, this.StepNbr, this.GlobalStep);
-				
-				// Enregistrement de l'exp�rince en cours
-			//	writeStepNbr(planMgmt.agent, this.StepNbr);
-			//	resetStepNbr(planMgmt.agent);
-			//	if(planMgmt.agent.equals("Agent2001"))
-			//	writeGlobalStep(agentCourant, this.GlobalStep);
-			//	writeGlobalStep(planMgmt.agent, this.GlobalStep);
-				
-				
 				System.out.println("Liste Totale des actions :"+totalActionsList.toString());
 				System.out.println("Nombre Total des actions :"+totalActionsList.size());
 				System.out.println("Nombre des Instances des Actions Locales :");
-			/*	
-				int nbrInst = 0;
-				for(Edge edg:localPlan.graphPlan.getEachEdge()){
-					System.out.println("-->   "+edg.getId()+"    Nbr : "+totalLocalActionsInstances[nbrInst]);
-					nbrInst++;
-				}
-			*/
-				
+		
 				disc.displayConfirmedFinalPathOnConsole(localPlan.graphPlan, Ct.currentAlternativeSent);
 			}
 		}else{
@@ -4006,68 +3938,9 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 		if(Ct.currentAlternativeSent==0) System.out.println("No alternative sent !!!!!");
 		if(discussionList.size()==0) System.out.println("No Discussion !!!!!");
 		
-	//	Graph finalAgreedPath = disc.getFinalPathToDisplay();
-	//	finalAgreedPath.addAttribute("ui.quality");
-	//	finalAgreedPath.addAttribute("ui.antialias");
-	//	Viewer viewer = finalAgreedPath.display();
-	//  Bloquer les agent apr�s 100 round.
 		
 		planRoot.setAttribute("ui.label", " Alt("+Ct.currentAlternativeSent+") - Round("+globalNegotiationRound+") "+" "+myAgent.getLocalName());
-
-		
-		
-		
-		//printAllPlans(myAgent.getLocalName());
-		
-		
-		// Affichage de toutes les propositions re�ues : 
-		//	Tr.diplayReceivedProposalsList(receivedProposals, " de tous les agents");
-		
-		/*
-		for (int i = 0; i < agentsList.length; i++) {
-			System.out.println("Les propositions envoy�es par l'agent : "+agentsList[i].getLocalName());
-			Tr.diplayReceivedProposalsList(Tr.getReceivedProposalsFromAgent(receivedProposals, agentsList[i].getLocalName()), " de L'agent "+agentsList[i].getLocalName());
-		}
-		*/
-		
-		/*
-		for (int i = 0; i < agentsList.length; i++) {
-			System.out.println("Les propositions re�ues avec la pr�sence de l'agent : "+agentsList[i].getLocalName());
-			Tr.diplayReceivedProposalsList(Tr.getReceivedProposalsWhereAgentIn(receivedProposals, agentsList[i].getLocalName()), " avec l'agent pr�sent : "+agentsList[i].getLocalName());
-		}
-		*/
-		/*
-		for (int i = 0; i < agentsList.length; i++) {
-			System.out.println("Les propositions envoy�es par l'agent : "+agentsList[i].getLocalName() + " Avec la pr�sence de l'agent Agent2" );
-			Tr.diplayReceivedProposalsList(Tr.getReceivedProposalsFromAgentWhereAgentIn(receivedProposals, agentsList[i].getLocalName(), "Agent2"), " avec l'agent pr�sence: Agent2");
-		}
-		*/
-		
-		
-		/*
-		for (Edge edge : localPlan.graphPlan.getEachEdge()) {
-			System.out.println("Les propositions re�ues concentnant l'action  : "+edge.getId() );
-			Tr.diplayReceivedProposalsList(Tr.getReceivedProposalsConcerningAction(receivedProposals, edge.getId()), " Concernant l'action : "+edge.getId());
-		}
-		*/
-		
-		/*
-		for (Iterator iterator = discussionList.iterator(); iterator.hasNext();) {
-			Discussion disc = (Discussion) iterator.next();
-			
-			System.out.println("The needed Accepts for the discussion : "+disc.discussionPath.getEdgeSet().toString());
-			System.out.println(" Is : "+Tr.getNeededAcceptToGet(receivedProposals, disc));
-			
-		}
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		Tr.updateDiscussionsState(receivedProposals, discussionList);
 		Tr.updateDiscussionsParameters(receivedProposals, discussionList, localPlan.graphPlan);
@@ -4140,7 +4013,13 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 		// Affichage de l'�tat de validit� des coalitions
 		//	Tr.displayCoalitionsAcceptValidity(discussionList);
 		//	if(Ct.isSolutionFound)
-		 DFService.deregister(myAgent);
+		
+		try {
+			writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+		
+		if(myAgent.getLocalName().contains("Agent"))
+		try { DFService.deregister(myAgent); } catch (FIPAException e2) { e2.printStackTrace(); }
+	 	// DFService.deregister(myAgent);
 		
 		
 		//Thread.sleep(90000);
@@ -4150,8 +4029,7 @@ private void endingCoalitionFormationProcess(Agent myAgent) throws IOException, 
 			
 			//myAgent.doDelete();
 			//viewer.close();
-			try {
-				writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+		
 			
 			//System.exit(0);
 			this.takeDown();
@@ -4522,7 +4400,7 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 				saveDiscussionProbabiloities(globalNegotiationRound);
 				globalDiscussionNbr++;
 				//fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalDiscussionNbr+"_discussionsProbability.txt");
-				fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
+				fileDiscussionProbability = new File("logs/"+prefix+"_"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
 				
 				//update the relaining possible discussions related data. 
 				Tr.updateForResumption(localPlan.graphPlan,discussionList);
@@ -4531,18 +4409,22 @@ private void endingCoalitionFormationProcessWithResumption(Agent myAgent) throws
 			
 		}else{
 			
-			DFService.deregister(myAgent);
+			try {
+				writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+			
+			if(myAgent.getLocalName().contains("Agent"))
+			//DFService.deregister(myAgent);
+			try { DFService.deregister(myAgent); } catch (FIPAException e2) { e2.printStackTrace(); }
 			
 			
-			if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
+		if((sysExit) && (Ct.currentAlternativeSent == 0) && (resultType == 2)){
 				
 				// myAgent.doDelete();
 				//this.takeDown();
 				//this.doDelete();
 				//viewer.close();
 				
-				try {
-					writeStatut(0); } catch (IOException e5) { e5.printStackTrace(); }
+				
 				//System.exit(0);
 				//this.doSuspend();
 				this.takeDown();
@@ -5391,7 +5273,7 @@ private void restartTheProcess(Agent myAgent) throws IOException {
 	globalDiscussionNbr++;
 	
 	//fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalDiscussionNbr+"_discussionsProbability.txt");
-	fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
+	fileDiscussionProbability = new File("logs/"+prefix+"_"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt");
 	
 } // fin de restartTheProcess
 
@@ -5741,7 +5623,7 @@ public void updateDiscussionOrder(){
 public void saveDiscussionProbabiloities(int round){
 	//resetSaveedDiscussionProbabiloities();
 	if(round!=0)
-	fileDiscussionProbability = new File("logs/"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt"); 
+	fileDiscussionProbability = new File("logs/"+prefix+"_"+GlobalStep+"_"+localPlan.agentOwner+"_"+globalNegotiationRound+"_discussionsProbability.txt"); 
 	
 	try {
 		PrintWriter fileProbaPrint = new PrintWriter(new FileWriter(fileDiscussionProbability));
@@ -5962,6 +5844,14 @@ public void updateForResumption() throws IOException{
 
 public void  writeStatut(int st) throws IOException{
 	File statutFile = new File("logs/"+this.getLocalName()+".txt"); 
+	PrintWriter f = new PrintWriter(new FileWriter(statutFile));
+	f.write(st+"");
+	f.close();
+}
+
+
+public void  writeRound(int st) throws IOException{
+	File statutFile = new File("logs/current_round_"+this.getLocalName()+".txt"); 
 	PrintWriter f = new PrintWriter(new FileWriter(statutFile));
 	f.write(st+"");
 	f.close();
