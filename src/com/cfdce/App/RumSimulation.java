@@ -31,7 +31,7 @@ public class RumSimulation {
 	public static int maxRoundBAA = 3;
 	public static String prefixBAA = "BAA";
 	
-	public static int costLimitPercentageCFDCE = 75;
+	public static int costLimitPercentageCFDCE = 68;
 	public static int maxRoundCFDCE = 30;
 	public static String prefixCFDC = "CFDE";
 	
@@ -50,7 +50,7 @@ public class RumSimulation {
 
 	public static void main(String args[]) throws InterruptedException, StaleProxyException, IOException {
 
-		int agentTab[] = new int[] { 1, 2, 3 };
+		int agentTab[] = new int[] { 1, 2, 3, 4 };
 
 		int globalStep = 1;
 		int globalStepCounter = 1;
@@ -62,8 +62,14 @@ public class RumSimulation {
 		int sim = 1;
 		while (isSimulation) {
 			
+			
+			
 			if((globalStepCounter % 2) == 1) {
+				int cost = loadCostLimit();
 				costLimitPercentage = costLimitPercentageCFDCE;
+				if(cost > 40 && cost <= 100)
+				costLimitPercentage = cost;
+				
 				maxRound = maxRoundCFDCE;
 				prefix = prefixCFDC;
 				sim = 1;
@@ -250,6 +256,12 @@ public class RumSimulation {
 		return sc.nextInt();
 	}
 
+	public static int loadCostLimit() throws FileNotFoundException {
+		File f = new File("config/CostLimit.txt");
+		Scanner sc = new Scanner(f);
+		return sc.nextInt();
+	}
+	
 	public static void writeGlobalStep(int GlobalStep) throws IOException {
 		PrintWriter f = new PrintWriter(new FileWriter("config/GlobalStep.txt"));
 		f.write((GlobalStep + 1) + "");
