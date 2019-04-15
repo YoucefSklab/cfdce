@@ -10,47 +10,51 @@ public final class ActionsCost {
 		// Condition to run the paper example centralized
 		if(1==1){	
 			if (action.equals("AB"))
-				return 40;
+				return 60;
 			if (action.equals("AC"))
-				return 40;
+				return 60;
 			if (action.equals("BD"))
-				return 40;
+				return 64;
 			if (action.equals("CD"))
-				return 40;
+				return 60;
 			if (action.equals("AD"))
-				return 40;
+				return 60;
 			if (action.equals("CE"))
-				return 42;
+				return 64;
 			if (action.equals("EF"))
-				return 38;
+				return 58;
 			if (action.equals("DF"))
-				return 38;
+				return 58;
 			if (action.equals("CF"))
-				return 38;
+				return 60;
 			if (action.equals("DG"))
-				return 35;
+				return 55;
 			if (action.equals("GH"))
-				return 40;
+				return 60;
 			if (action.equals("FH"))
-				return 40;
+				return 63;
 			if (action.equals("BI"))
-				return 40;
+				return 60;
 			if (action.equals("IG"))
-				return 40;
+				return 60;
 			if (action.equals("BG"))
-				return 40;
+				return 60;
 			if (action.equals("DH"))
-				return 40;
+				return 60;
 			if (action.equals("HJ"))
-				return 40;
+				return 60;
 			if (action.equals("IJ"))
-				return 40;
+				return 60;
 			if (action.equals("EJ"))
-				return 40;
+				return 60;
 			if (action.equals("GJ"))
-				return 40;
+				return 60;
 			if (action.equals("FJ"))
-				return 40;
+				return 60;
+			if (action.equals("HI"))
+				return 63;
+			if (action.equals("HG"))
+				return 63;
 
 		}
 		
@@ -59,44 +63,44 @@ public final class ActionsCost {
 		// Condition to run the paper example Distributed
 		if(1==1){	
 			if (action.equals("AD"))
-				return 40;
+				return 60;
 			if (action.equals("DG"))
-				return 40;
+				return 60;
 			if (action.equals("GI"))
-				return 40;
+				return 60;
 			if (action.equals("IJ"))
-				return 40;
+				return 60;
 			if (action.equals("GH"))
-				return 40;
+				return 60;
 			if (action.equals("HK"))
-				return 35;
+				return 55;
 			if (action.equals("MK"))
-				return 38;
+				return 58;
 			if (action.equals("BD"))
-				return 38;
+				return 58;
 			if (action.equals("MJ"))
-				return 38;
+				return 58;
 			if (action.equals("BE"))
-				return 35;
+				return 55;
 			if (action.equals("EG"))
-				return 40;
+				return 60;
 			if (action.equals("CE"))
-				return 38;
+				return 58;
 			if (action.equals("IK"))
-				return 35;
+				return 55;
 			
 			if (action.equals("DM"))
-				return 45;
+				return 65;
 			if (action.equals("HJ"))
-				return 38;
+				return 58;
 			
 			if (action.equals("AF"))
-				return 30;
+				return 50;
 			
 			if (action.equals("FI"))
 				return 55;
 			if (action.equals("CM"))
-				return 33;
+				return 53;
 		}
 		
 				
@@ -116,7 +120,7 @@ public final class ActionsCost {
 		if (action.equals("BE"))
 			return 45;
 		if (action.equals("BF"))
-			return 45;
+			return 62;
 		if (action.equals("CF"))
 			return 45;
 		if (action.equals("DF"))
