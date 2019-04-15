@@ -67,6 +67,7 @@ public class RumSimulation {
 			if((globalStepCounter % 2) == 1) {
 				int cost = loadCostLimit();
 				costLimitPercentage = costLimitPercentageCFDCE;
+				
 				if(cost > 40 && cost <= 100)
 				costLimitPercentage = cost;
 				
