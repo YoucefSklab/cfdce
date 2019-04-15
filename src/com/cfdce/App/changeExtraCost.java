@@ -26,6 +26,7 @@ public class changeExtraCost {
 		agentList.add("Plan_Agent_7.txt");
 		agentList.add("Plan_Agent_8.txt");
 		agentList.add("Plan_Agent_9.txt");
+		agentList.add("Plan_Agent_10.txt");
 		//agentList.add("Plan_Agent_5.txt");
 
 		for( int i = 1; i < 11; i++ ) {
@@ -79,7 +80,9 @@ public class changeExtraCost {
 
 					if (!escape) {
 					//	if (!N1.equals("start")) {
-						String tasksLine = N1 + "," + N2 + ";" + ThreadLocalRandom.current().nextInt(20, 60);
+						int b1 = ThreadLocalRandom.current().nextInt(20, 30);
+						int b2 = ThreadLocalRandom.current().nextInt(32, 60);
+						String tasksLine = N1 + "," + N2 + ";" + ThreadLocalRandom.current().nextInt(b1, b2);
 							taskList.add(tasksLine);
 							System.out.println("The tasks string line is: "+tasksLine);
 					//	}

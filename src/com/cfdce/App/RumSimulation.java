@@ -24,8 +24,26 @@ public class RumSimulation {
 	public static String classPath = "target.classes.com.cfdce";
 
 	public static int costLimitPercentage = 100;
-	public static int maxRound = 3;
+	public static int maxRound = 15;
+	public static String prefix = "";
+	
+	public static int costLimitPercentageBAA = 100;
+	public static int maxRoundBAA = 3;
+	public static String prefixBAA = "BAA";
+	
+	public static int costLimitPercentageCFDCE = 75;
+	public static int maxRoundCFDCE = 30;
+	public static String prefixCFDC = "CFDE";
+	
+	
+	public static long currentTime = (long) System.currentTimeMillis();
+	public static long roundTime = (long) System.currentTimeMillis();
+	public static long timeInterval = 1800000;
 
+	
+	public static changeExtraCost chgExtraCost = new changeExtraCost();
+	
+	
 	public static int round = 0;
 	public static boolean isSimulation = true;
 	public static boolean isNewRound = true;
@@ -35,13 +53,26 @@ public class RumSimulation {
 		int agentTab[] = new int[] { 1, 2, 3 };
 
 		int globalStep = 1;
+		int globalStepCounter = 1;
 		globalStep = loadGlobalStep();
 
 		AgentContainer agentContainer = null;
 		AgentController agentController = null;
-
+	
+		int sim = 1;
 		while (isSimulation) {
-
+			
+			if((globalStepCounter % 2) == 1) {
+				costLimitPercentage = costLimitPercentageCFDCE;
+				maxRound = maxRoundCFDCE;
+				prefix = prefixCFDC;
+				sim = 1;
+			}else {
+				costLimitPercentage = costLimitPercentageBAA;
+				maxRound = maxRoundBAA;
+				prefix = prefixBAA;
+				sim = 2;
+			}
 			// premier passage
 			if (round == 0) {
 				for (int i = 0; i < agentTab.length; i++) {
@@ -55,6 +86,8 @@ public class RumSimulation {
 				e.printStackTrace();
 			}
 
+			
+			
 			boolean isNew = true;
 
 			Runtime runtimeAgentsCreator = Runtime.instance();
@@ -62,11 +95,13 @@ public class RumSimulation {
 			profileImplAgentsCreator.setParameter(ProfileImpl.MAIN_HOST, "localhost");
 			agentContainer = runtimeAgentsCreator.createAgentContainer(profileImplAgentsCreator);
 
+			
+			
 			for (int i = 0; i < agentTab.length; i++) {
 				int nbr = agentTab[i];
 				agentController = agentContainer.createNewAgent("Agent" + nbr, "com.cfdce.Agents.Agent2",
 						new Object[] { "Agent" + nbr, "" + nbr, "1000", "" + costLimitPercentage, "" + 0, "" + maxRound,
-								"" + globalStep });
+								"" + globalStep, prefix });
 				agentController.start();
 			}
 
@@ -79,6 +114,14 @@ public class RumSimulation {
 			isNewRound = true;
 			
 			while (isNewRound) {
+				System.out.println();System.out.println();
+				System.out.println(" ------------------------" );
+				System.out.println(" ----->>>>   Current simulation is with global: "+globalStep+ "   and prefix: "+prefix);
+				System.out.println(" ----->>>>   Elepsed time is : "+((long) System.currentTimeMillis() - roundTime));
+				System.out.println(" ----->>>>   Interval remaining time is : "+ (timeInterval - ((long) System.currentTimeMillis() - roundTime)));
+				
+				System.out.println(" ------------------------" );
+				System.out.println();System.out.println();
 				
 				isNew = true;
 				for (int i = 0; i < agentTab.length; i++) {
@@ -90,12 +133,39 @@ public class RumSimulation {
 				}
 
 				if (isNew) {
-					agentController.kill();
-					agentContainer.kill();
-					globalStep++;
-					writeGlobalStep(globalStep);
+					try { agentController.kill();} catch (Exception e) { e.printStackTrace();	}
+					try { agentContainer.kill();} catch (Exception e) { e.printStackTrace();	}
+					globalStepCounter++;
+					writeSimStatut(globalStep, prefix,"Succeded");
+					
+					if(sim == 2) {
+						globalStep++;
+						writeGlobalStep(globalStep);
+						chgExtraCost.main(args);
+					}
 					System.out.println("Launch another simulation");
 					isNewRound = false;
+					roundTime = (long) System.currentTimeMillis();
+				}else {
+					
+					currentTime = (long) System.currentTimeMillis();
+					if((currentTime - roundTime ) > timeInterval) {
+						
+						writeSimStatut(globalStep, prefix, "Failed");
+						try { agentController.kill();} catch (Exception e) { e.printStackTrace();	}
+						try { agentContainer.kill();} catch (Exception e) { e.printStackTrace();	}
+						globalStepCounter++;
+						globalStep++;
+						writeGlobalStep(globalStep);
+						chgExtraCost.main(args);
+						
+						for (int i = 0; i < agentTab.length; i++) {
+							writeStatut(0, "Agent"+agentTab[i]); 
+						}
+						
+					}
+					
+					
 				}
 
 				try {
@@ -185,5 +255,14 @@ public class RumSimulation {
 		f.write((GlobalStep + 1) + "");
 		f.close();
 	}
+	
+	public static void writeSimStatut(int step, String pref,  String statut) throws IOException {
+		File statutFile = new File("logs/Sim_"+step+"_"+pref+".txt");
+		PrintWriter f = new PrintWriter(new FileWriter(statutFile));
+		f.write(step+" simulation is "+statut);
+		f.close();
+	}
+	
+	
 
 }
