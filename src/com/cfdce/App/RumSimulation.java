@@ -32,7 +32,7 @@ public class RumSimulation {
 	public static String prefixBAA = "BAA";
 	
 	public static int costLimitPercentageCFDCE = 68;
-	public static int maxRoundCFDCE = 30;
+	public static int maxRoundCFDCE = 12;
 	public static String prefixCFDC = "CFDE";
 	
 	
@@ -50,7 +50,7 @@ public class RumSimulation {
 
 	public static void main(String args[]) throws InterruptedException, StaleProxyException, IOException {
 
-		int agentTab[] = new int[] { 1, 2, 3, 4 };
+		int agentTab[] = new int[] {1, 2, 3,4 };
 
 		int globalStep = 1;
 		int globalStepCounter = 1;

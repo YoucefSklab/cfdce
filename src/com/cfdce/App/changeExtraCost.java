@@ -28,6 +28,8 @@ public class changeExtraCost {
 		agentList.add("Plan_Agent_9.txt");
 		agentList.add("Plan_Agent_10.txt");
 		//agentList.add("Plan_Agent_5.txt");
+		
+		
 
 		for( int i = 1; i < 11; i++ ) {
 			String fichier = "Plan_Agent_" + i + ".txt";

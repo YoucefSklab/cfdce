@@ -27,8 +27,10 @@ public class CollectReasultsNew {
 		int GlobalStep = 1;
 		int totalFiles = 1;
 		int pourcentage = 100;
-		// String prefix = "CFDE_4_ag";
-		String prefix = "BAA_4_ag";
+		String agentTour = "_4_ag";
+		 String prefix = "CFDE";
+		//String prefix = "BAA";
+		
 		
 		String reasult = "";
 
@@ -47,7 +49,7 @@ public class CollectReasultsNew {
 			
 			PrintWriter f = null;
 			try {
-				f = new PrintWriter(new FileWriter("SimReasults/" + prefix + "_Agent_" + ag
+				f = new PrintWriter(new FileWriter("SimReasults/" + prefix +agentTour+"_Agent_" + ag
 						+ "_CollectedResultsAgentSet.txt"));
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -68,7 +70,7 @@ public class CollectReasultsNew {
 			//f.println(" Poucentage :  " + pourcentage);
 			//f.println(" --------------------------");
 
-			while (GlobalStep <= 174) {
+			while (GlobalStep <= 147) {
 
 				System.out.println(
 						"-------------------------------------------------------------------------------------------------");
