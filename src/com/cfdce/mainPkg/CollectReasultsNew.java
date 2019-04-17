@@ -23,12 +23,13 @@ public class CollectReasultsNew {
 
 		// set 5, 6
 
-	
+		int aNbr = 8;
 		int GlobalStep = 1;
+		int maxGlobal = 96;
 		int totalFiles = 1;
 		int pourcentage = 100;
-		String agentTour = "_4_ag";
-		 String prefix = "CFDE";
+		String agentTour = "_"+aNbr+"_ag";
+		String prefix = "CFDE";
 		//String prefix = "BAA";
 		
 		
@@ -40,8 +41,14 @@ public class CollectReasultsNew {
 		listAgent.add(2);
 		listAgent.add(3);
 		listAgent.add(4);
+		listAgent.add(5);
+		listAgent.add(6);
+		listAgent.add(7);
+		listAgent.add(8);
+		listAgent.add(9);
+		listAgent.add(10);
 		
-		for (int k = 0; k < listAgent.size(); k++) {
+		for (int k = 0; k < aNbr; k++) {
 			int ag = (int) listAgent.get(k);
 			reasult = "";
 			GlobalStep = 1;
@@ -60,17 +67,16 @@ public class CollectReasultsNew {
 			reasult += " Agent Set: "+listAgent.toString()+"\n";
 			reasult += " Agent's Reasult: Agent"+ag+"\n";
 			reasult += " Poucentage : " + pourcentage+"\n";
-			reasult += " --------------------------"+"\n";
+			reasult += " ------------------------------------"+"\n";
 			
 			reasult += "Step, Agent, ref Cost (First), Final Cost, Indice"+"\n";
 			
-
 			//f.println(" Agent Set:" + listAgent.toString());
 			//f.println(" Agent's Reasult: Agent"+ag);
 			//f.println(" Poucentage :  " + pourcentage);
 			//f.println(" --------------------------");
 
-			while (GlobalStep <= 147) {
+			while (GlobalStep <= maxGlobal) {
 
 				System.out.println(
 						"-------------------------------------------------------------------------------------------------");
@@ -81,7 +87,6 @@ public class CollectReasultsNew {
 						"-------------------------------------------------------------------------------------------------");
 				System.out.println(
 						"-------------------------------------------------------------------------------------------------");
-
 				
 
 				int fileTest = 30;
@@ -91,7 +96,6 @@ public class CollectReasultsNew {
 
 					File f1 = new File("logs/"+ prefix + "_" + GlobalStep + "_Agent" + ag + "_" + fileTest
 							+ "_discussionsProbability.txt");
-
 					if (f1.exists()) {
 						System.out.println(totalFiles + " -> " + GlobalStep + "_Agent" + ag + "_" + fileTest
 								+ "_discussionsProbability.txt");
@@ -106,17 +110,11 @@ public class CollectReasultsNew {
 					}
 				}
 				GlobalStep++;
-
-				
 			}
-			
 			f.println(reasult);
 			f.close();
-
 		}
-
 		System.out.println("End of the program !!");
-
 	}
 
 }
