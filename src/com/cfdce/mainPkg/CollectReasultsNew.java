@@ -23,9 +23,9 @@ public class CollectReasultsNew {
 
 		// set 5, 6
 
-		int aNbr = 8;
+		int aNbr = 7;
 		int GlobalStep = 1;
-		int maxGlobal = 96;
+		int maxGlobal = 213;
 		int totalFiles = 1;
 		int pourcentage = 100;
 		String agentTour = "_"+aNbr+"_ag";
@@ -64,12 +64,12 @@ public class CollectReasultsNew {
 			f.println(" ");
 			//f.println("Agent, ref Cost (First), Final Cost, Indice");
 			
-			reasult += " Agent Set: "+listAgent.toString()+"\n";
-			reasult += " Agent's Reasult: Agent"+ag+"\n";
-			reasult += " Poucentage : " + pourcentage+"\n";
-			reasult += " ------------------------------------"+"\n";
+			//reasult += " Agent Set: "+listAgent.toString()+"\n";
+			//reasult += " Agent's Reasult: Agent"+ag+"\n";
+			//reasult += " Poucentage : " + pourcentage+"\n";
+			//reasult += " ------------------------------------"+"\n";
 			
-			reasult += "Step, Agent, ref Cost (First), Final Cost, Indice"+"\n";
+			//reasult += "Step, Agent, ref Cost (First), Final Cost, Indice"+"\n";
 			
 			//f.println(" Agent Set:" + listAgent.toString());
 			//f.println(" Agent's Reasult: Agent"+ag);
