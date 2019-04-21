@@ -23,12 +23,17 @@ public class CollectReasultsNew {
 
 		// set 5, 6
 
-		int aNbr = 7;
+		int aNbr = 10;
 		int GlobalStep = 1;
-		int maxGlobal = 213;
+		int steps = 1;
+		int maxGlobal = 250;
 		int totalFiles = 1;
 		int pourcentage = 100;
 		String agentTour = "_"+aNbr+"_ag";
+		String complementPath = "";
+		
+		complementPath = aNbr+"_Agents/";
+		
 		String prefix = "CFDE";
 		//String prefix = "BAA";
 		
@@ -50,9 +55,12 @@ public class CollectReasultsNew {
 		
 		for (int k = 0; k < aNbr; k++) {
 			int ag = (int) listAgent.get(k);
+			
 			reasult = "";
 			GlobalStep = 1;
 			totalFiles = 1;
+			
+			
 			
 			PrintWriter f = null;
 			try {
@@ -61,7 +69,7 @@ public class CollectReasultsNew {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			f.println(" ");
+			//f.println(" ");
 			//f.println("Agent, ref Cost (First), Final Cost, Indice");
 			
 			//reasult += " Agent Set: "+listAgent.toString()+"\n";
@@ -90,11 +98,11 @@ public class CollectReasultsNew {
 				
 
 				int fileTest = 30;
-
+				boolean filed = false;
 				while (fileTest != 0) {
 					fileTest--;
 
-					File f1 = new File("logs/"+ prefix + "_" + GlobalStep + "_Agent" + ag + "_" + fileTest
+					File f1 = new File("logs/"+ complementPath + prefix + "_" + GlobalStep + "_Agent" + ag + "_" + fileTest
 							+ "_discussionsProbability.txt");
 					if (f1.exists()) {
 						System.out.println(totalFiles + " -> " + GlobalStep + "_Agent" + ag + "_" + fileTest
@@ -103,13 +111,65 @@ public class CollectReasultsNew {
 						if (sc.hasNextLine()) {
 							String text = sc.nextLine();
 							//f.println("Agent" + ag + "," + text);
-							reasult += GlobalStep+",Agent" + ag + "," + text+"\n";
+							boolean first = false;
+							boolean second = false;
+							boolean thired = false;
+							boolean forth = false;
+							
+							String value = "";
+							float value1 = 0;
+							float value2 = 0;
+							float value3 = 0;
+							System.out.println("Text  is "+text);
+							for(int y=0; y<text.length(); y++) {
+								System.out.println("value is "+value);
+								
+								if(text.charAt(y) == ',') {
+									
+									if(first && !second) { 
+										second = true;
+										System.out.println("value is 3:"+value);
+										value2 = Float.parseFloat(value);
+										value = "";
+									}
+									
+									if(!first) { 
+										first = true; 
+										System.out.println("value is 2:"+value);
+										value1 = Float.parseFloat(value);
+										value = "";
+									}
+									
+									
+								}else {
+									value+=text.charAt(y);
+									//System.out.println("value is 3: "+value);
+								}
+								
+							}
+							
+							value3 = Float.parseFloat(value);
+							
+							float eff = ( ( (float) (value1-value2) ) / value1 );
+							
+							if(eff > 0) {
+								value3 = 1;
+							}else {
+								value3 = 0;
+							}
+ 							
+							reasult += GlobalStep+",Agent" + ag + "," + text+ ","+eff+","+value3+"\n";
+							
+							filed = true;
 						}
 						totalFiles++;
 						break;
 					}
 				}
-				GlobalStep++;
+				if(!filed) {
+					reasult += GlobalStep+",Agent" + ag + "," + " "+"\n";
+				}
+				GlobalStep++;	
 			}
 			f.println(reasult);
 			f.close();
