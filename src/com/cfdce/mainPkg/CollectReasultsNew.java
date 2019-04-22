@@ -23,10 +23,10 @@ public class CollectReasultsNew {
 
 		// set 5, 6
 
-		int aNbr = 10;
+		int aNbr = 5;
 		int GlobalStep = 1;
 		int steps = 1;
-		int maxGlobal = 250;
+		int maxGlobal = 61;
 		int totalFiles = 1;
 		int pourcentage = 100;
 		String agentTour = "_"+aNbr+"_ag";

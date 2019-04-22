@@ -475,6 +475,7 @@ public class Agent2 extends Agent {
 				
 				prefix = (String) args[7];
 				
+				prefix = Integer.parseInt(((String) args[8]))+"_"+prefix;
 				if(existPanel == 1){ 
 					panel = (JPanel) args[5];
 				}

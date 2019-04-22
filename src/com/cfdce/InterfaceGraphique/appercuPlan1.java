@@ -110,7 +110,7 @@ public class appercuPlan1 extends JFrame {
 				
 				g.setStrict(false);
 				g.setAutoCreate(true); // cr�ation automatique des noeuds.
-				//g.addAttribute("ui.stylesheet", "url('file:C:\\Planning/Modele1.css')"); 
+				g.addAttribute("ui.stylesheet", "url('file:config/Modele1.css')");
 				g.addAttribute("ui.quality"); 
 				g.addAttribute("ui.antialias");
 				//getRoot(g).setAttribute("ui.label", "start"); 
@@ -445,7 +445,7 @@ public class appercuPlan1 extends JFrame {
 		//g = new MultiGraph("embedded");
 		g = pSet.getPlanByNbr(1);
 		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
-		//g.addAttribute("ui.stylesheet", "url('file:\\config/Modele1.css')");
+		g.addAttribute("ui.stylesheet", "url('file:config/Modele1.css')");
 		
 		Node start = getRoot(g);
 		start.setAttribute("xyz", 250,450,0);
@@ -502,7 +502,7 @@ public class appercuPlan1 extends JFrame {
 		start.setAttribute("ui.label", "11111");
 		g.setStrict(false);
 		g.setAutoCreate( true ); // cr�ation automatique des noeuds.
-		g.addAttribute("ui.stylesheet", "url('file:C:\\Planning/Modele1.css')"); 
+		g.addAttribute("ui.stylesheet", "url('file:config/Modele1.css')");
 		g.addAttribute("ui.quality"); 
 		g.addAttribute("ui.antialias");
 		//g.getNode("start").setAttribute("ui.label", "start"); 

@@ -23,16 +23,16 @@ public class RumSimulation {
 	// "Users.sklab.GamaCloudWorkigDirectory.EclipseOxy3A.GamaFrom09-18.cfdce.target.classes.com.cfdce";
 	public static String classPath = "target.classes.com.cfdce";
 
-	public static int costLimitPercentage = 100;
+	public static int costLimitPercentage = 68;
 	public static int maxRound = 15;
 	public static String prefix = "";
 	
-	public static int costLimitPercentageBAA = 100;
+	public static int costLimitPercentageBAA = 68;
 	public static int maxRoundBAA = 3;
 	public static String prefixBAA = "BAA";
 	
 	public static int costLimitPercentageCFDCE = 68;
-	public static int maxRoundCFDCE = 12;
+	public static int maxRoundCFDCE = 15;
 	public static String prefixCFDC = "CFDE";
 	
 	
@@ -43,14 +43,15 @@ public class RumSimulation {
 	
 	public static changeExtraCost chgExtraCost = new changeExtraCost();
 	
-	
+	public static int nbrAgents = 3;
+	public static int simRound = 60;
 	public static int round = 0;
 	public static boolean isSimulation = true;
 	public static boolean isNewRound = true;
 
 	public static void main(String args[]) throws InterruptedException, StaleProxyException, IOException {
 
-		int agentTab[] = new int[] {1, 2, 3,4 };
+		int agentTab[] = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 		int globalStep = 1;
 		int globalStepCounter = 1;
@@ -62,7 +63,10 @@ public class RumSimulation {
 		int sim = 1;
 		while (isSimulation) {
 			
-			
+			if(globalStep > simRound) {
+				globalStep = 0;
+				nbrAgents++;
+			}
 			
 			if((globalStepCounter % 2) == 1) {
 				int cost = loadCostLimit();
@@ -82,7 +86,7 @@ public class RumSimulation {
 			}
 			// premier passage
 			if (round == 0) {
-				for (int i = 0; i < agentTab.length; i++) {
+				for (int i = 0; i < nbrAgents; i++) {
 					writeStatut(0, "Agent" + agentTab[i]);
 				}
 			}
@@ -104,11 +108,11 @@ public class RumSimulation {
 
 			
 			
-			for (int i = 0; i < agentTab.length; i++) {
+			for (int i = 0; i < nbrAgents; i++) {
 				int nbr = agentTab[i];
 				agentController = agentContainer.createNewAgent("Agent" + nbr, "com.cfdce.Agents.Agent2",
 						new Object[] { "Agent" + nbr, "" + nbr, "1000", "" + costLimitPercentage, "" + 0, "" + maxRound,
-								"" + globalStep, prefix });
+								"" + globalStep, prefix , ""+nbrAgents});
 				agentController.start();
 			}
 
@@ -131,7 +135,7 @@ public class RumSimulation {
 				System.out.println();System.out.println();
 				
 				isNew = true;
-				for (int i = 0; i < agentTab.length; i++) {
+				for (int i = 0; i < nbrAgents; i++) {
 					int st = 1;
 					st = getStatut("Agent" + agentTab[i]);
 					if (st == 1) {
@@ -166,7 +170,7 @@ public class RumSimulation {
 						writeGlobalStep(globalStep);
 						chgExtraCost.main(args);
 						
-						for (int i = 0; i < agentTab.length; i++) {
+						for (int i = 0; i < nbrAgents; i++) {
 							writeStatut(0, "Agent"+agentTab[i]); 
 						}
 						
