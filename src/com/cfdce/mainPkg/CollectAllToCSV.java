@@ -50,8 +50,20 @@ public class CollectAllToCSV {
 		listAgent.add(8);
 		listAgent.add(9);
 		listAgent.add(10);
+		
+		listAgent.add(11);
+		listAgent.add(12);
+		listAgent.add(13);
+		listAgent.add(14);
+		listAgent.add(15);
+		listAgent.add(16);
+		listAgent.add(17);
+		listAgent.add(18);
+		listAgent.add(19);
+		listAgent.add(20);
+		
 
-		while (aNbr < 3) {
+		while (aNbr < 10) {
 			aNbr++;
 			for (int j = 0; j < prefTab.length; j++) {
 

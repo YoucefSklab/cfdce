@@ -316,7 +316,7 @@ public final class ActionsCost {
 		if (action.equals("UY"))
 			return 45;
 
-		return 50;
+		return 43;
 	}
 
 }

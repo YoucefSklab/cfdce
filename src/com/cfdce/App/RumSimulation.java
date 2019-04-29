@@ -23,7 +23,7 @@ public class RumSimulation {
 	// "Users.sklab.GamaCloudWorkigDirectory.EclipseOxy3A.GamaFrom09-18.cfdce.target.classes.com.cfdce";
 	public static String classPath = "target.classes.com.cfdce";
 
-	public static int costLimitPercentage = 68;
+	public static int costLimitPercentage = 70;
 	public static int maxRound = 15;
 	public static String prefix = "";
 	
@@ -31,7 +31,7 @@ public class RumSimulation {
 	public static int maxRoundBAA = 3;
 	public static String prefixBAA = "BAA";
 	
-	public static int costLimitPercentageCFDCE = 68;
+	public static int costLimitPercentageCFDCE = 70;
 	public static int maxRoundCFDCE = 15;
 	public static String prefixCFDC = "CFDE";
 	
@@ -44,14 +44,14 @@ public class RumSimulation {
 	public static changeExtraCost chgExtraCost = new changeExtraCost();
 	
 	public static int nbrAgents = 3;
-	public static int simRound = 60;
+	public static int simRound = 30;
 	public static int round = 0;
 	public static boolean isSimulation = true;
 	public static boolean isNewRound = true;
 
 	public static void main(String args[]) throws InterruptedException, StaleProxyException, IOException {
 
-		int agentTab[] = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+		int agentTab[] = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 
 		int globalStep = 1;
 		int globalStepCounter = 1;
@@ -64,8 +64,8 @@ public class RumSimulation {
 		while (isSimulation) {
 			
 			if(globalStep > simRound) {
-				globalStep = 0;
-				nbrAgents++;
+				globalStep = 1;
+				nbrAgents = nbrAgents + 1;
 			}
 			
 			if((globalStepCounter % 2) == 1) {

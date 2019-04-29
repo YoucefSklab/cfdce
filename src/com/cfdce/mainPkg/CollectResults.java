@@ -23,14 +23,14 @@ public class CollectResults {
 
 		// set 5, 6
 
-		int aNbr =7;
+		int aNbr = 3;
 		int GlobalStep = 1;
-		int maxGlobal = 61;
+		int maxGlobal = 51;
 		int totalFiles = 1;
 		int pourcentage = 100;
 		String agentTour = "_"+aNbr+"_ag";
-		//String prefix = "CFDE";
-		String prefix = "BAA";
+		String prefix = "CFDE";
+		//String prefix = "BAA";
 		
 		
 		String reasult = "";
@@ -47,6 +47,17 @@ public class CollectResults {
 		listAgent.add(8);
 		listAgent.add(9);
 		listAgent.add(10);
+		
+		listAgent.add(11);
+		listAgent.add(12);
+		listAgent.add(13);
+		listAgent.add(14);
+		listAgent.add(15);
+		listAgent.add(16);
+		listAgent.add(17);
+		listAgent.add(18);
+		listAgent.add(19);
+		listAgent.add(20);
 		
 		for (int k = 0; k < aNbr; k++) {
 			int ag = (int) listAgent.get(k);
