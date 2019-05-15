@@ -70,7 +70,7 @@ public class ResolverV9Experiments {
 	
 		ArrayList listeAgent = new ArrayList();
 
-		agentTab= new int[] {1,1,1};
+		agentTab= new int[] {1,2,3,4,5,6,7};
 		listeAgent.add(agentTab);
 		agentTab= new int[] {2,2,2};
 		listeAgent.add(agentTab);

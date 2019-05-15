@@ -43,7 +43,7 @@ public class RumSimulation {
 	
 	public static changeExtraCost chgExtraCost = new changeExtraCost();
 	
-	public static int nbrAgents = 3;
+	public static int nbrAgents = 10;
 	public static int simRound = 30;
 	public static int round = 0;
 	public static boolean isSimulation = true;
