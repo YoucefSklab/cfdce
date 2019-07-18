@@ -24,20 +24,22 @@ public class ResolverTimeConsuming {
 	public static int maxRounds = 31;
 	public static int roundCounter = 1;
 	public static boolean displayComments = false;
+	public static int experimentCounter = 1;
+	public static int experimentRoundCounter = 1;
 
 	// needed parameters per round
 	public static long totalNbrAgentInSystem = 0;
 	public static long initialNeededSteps = 1;
 	public static int nbrV = 0;
-	public static long totalTeT = 1;
-	public static long indicePlan = 0;
-	public static long indiceDep = 0;
-	public static long finalNeededSteps = 1;
+	public static double totalTeT = 1;
+	public static double indicePlan = 0;
+	public static double indiceDep = 0;
+	public static double finalNeededSteps = 1;
 
-	public static long[] exhaustifMean = new long[30];
-	public static long[] uTotalMean = new long[30];
-	public static long[] uMean = new long[30];
-	public static long[] elapsedTimeMean = new long[30];
+	public static double[] exhaustifMean = new double[30];
+	public static double[] uTotalMean = new double[30];
+	public static double[] uMean = new double[30];
+	public static double[] elapsedTimeMean = new double[30];
 
 	public static Random rand = new Random();
 	public static ArrayList<AgentModel> agentList = new ArrayList<AgentModel>();
@@ -50,11 +52,12 @@ public class ResolverTimeConsuming {
 	public static ArrayList<String> exploredTasks = new ArrayList<String>(); // les taches explor�es � un instant donn�.
 
 	public static int limit = 8962624;
-	public static int[] agentTab = { 6, 2, 5 };
-	public static int[] agentUtilityTime = new int[agentTab.length];
-	public static int totalAgentUtilityTime = 0;
+	public static int[] agentTab = { 4, 5,7};
+	public static double[] agentUtilityTime = new double[agentTab.length];
+	public static double utilityFactor = 100000000;
+	public static double totalAgentUtilityTime = 0;
 
-	public static float sysEffeciency = 0;
+	public static double sysEffeciency = 0;
 	public static String agentNames = "";
 	public static long startingTime = System.currentTimeMillis();
 
@@ -65,36 +68,44 @@ public class ResolverTimeConsuming {
 	public static ArrayList<Integer> indiceMin = new ArrayList<Integer>();
 	public static ArrayList<Integer> indiceMax = new ArrayList<Integer>();
 
-	public static long globalElapsedTime = 0;
-	public static long uConsumedTime = 0;
+	public static double globalElapsedTime = 0;
+	public static double uConsumedTime = 0;
 	public static long currentTime = 0;
 	public static long lastTime = 0;
 
-	public static int minVal = 50;
-	public static int maxVal = 500;
+	public static int minVal = 0;
+	public static int maxVal = 10;
 
-	public static long exhaustifMeanvalue = 0;
-	public static long uTotalMeanValue = 0;
-	public static long uMeanValue = 0;
-	public static long elapsedTimeMeanValue = 0;
+	public static double exhaustifMeanvalue = 0;
+	public static double uTotalMeanValue = 0;
+	public static double uMeanValue = 0;
+	public static double elapsedTimeMeanValue = 0;
 
 	public static void main(String[] args) throws IOException, FIPAException, InterruptedException {
 
 		// ------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------
-		int experimentCounter = 1;
+		
+		
+		//System.out.println(getExperimentTitle());
+		
 		while (experimentCounter < maxExperiment) {
-			int experimentRoundCounter = 1;
+			minVal =50;
+			maxVal =500;
+			utilityFactor = 20000;
+			
+			experimentRoundCounter = 1;
+			System.out.println(getExperimentTitle());
 			// ------------------------------------------------------------------------------------------
 			while (experimentRoundCounter < maxRounds) {
-				System.out.println("- Experiment: " + experimentCounter + " - Round: " + experimentRoundCounter);
+				//System.out.println("- Experiment: " + experimentCounter + " - Round: " + experimentRoundCounter);
 				resetExperimentParameters();
 
 				agentList = MethColl.loadPlans(agentTab);
 				allTasksList = MethColl.getTasksList(agentList);
 
 				for (int i = 0; i < agentUtilityTime.length; i++) {
-					agentUtilityTime[i] = ThreadLocalRandom.current().nextInt(minVal, maxVal);
+					agentUtilityTime[i] = (double) ((double) ThreadLocalRandom.current().nextInt(minVal, maxVal) /  (double) utilityFactor);
 					totalAgentUtilityTime += agentUtilityTime[i];
 				}
 
@@ -165,8 +176,11 @@ public class ResolverTimeConsuming {
 					}
 				}
 
-				displayExperimentParameters();
-				displayMiniRoundReasults();
+				//displayExperimentParameters();
+				//displayMiniRoundReasults();
+				
+				System.out.println(getRoundResultValues());
+				
 				collectMeansValueses(experimentRoundCounter - 1);
 
 				experimentRoundCounter++;
@@ -176,9 +190,8 @@ public class ResolverTimeConsuming {
 			computeExperimentMeansVariables();
 
 			System.out.println();
-			System.out.println(
-					"Exp Values are: exhaustifMeanvalue " + exhaustifMeanvalue + " uTotalMeanValue: " + uTotalMeanValue
-							+ " uMeanValue: " + uMeanValue + " elapsedTimeMeanValue: " + elapsedTimeMeanValue);
+			System.out.println(getExperimentMeanValuesTitle());
+			System.out.println(getExperimentMeanValues());
 			System.out.println();
 
 			resetExperimentMeansVariables();
@@ -255,8 +268,10 @@ public class ResolverTimeConsuming {
 		for (int h = 0; h < tempIndiceMax.size(); h++) {
 			int ind = tempIndiceMax.get(h);
 			initialNeededSteps = initialNeededSteps * ind;
-			if (ind >= 2)
+			if (ind >= 2) {
 				nbrV++;
+			}
+				
 		}
 	}
 
@@ -420,7 +435,7 @@ public class ResolverTimeConsuming {
 
 		displayRoundReasults();
 
-		System.out.println("Total consumed time in  milliseconds is: " + (long) (globalElapsedTime / 1));
+		System.out.println("Total consumed time in  milliseconds is: " + (double) (globalElapsedTime / 1));
 		System.out.println("Total utility consumed time is: " + (uConsumedTime / 1));
 		System.out.println("Total needed time all alternatives is " + (initialNeededSteps * totalAgentUtilityTime));
 		System.out.println("Total agent utility time: " + (totalAgentUtilityTime));
@@ -432,18 +447,41 @@ public class ResolverTimeConsuming {
 				"Initial needed steps, Final Steps, setV, Total TeT, Indice du plan, nbr Agent, consumed Time (ms), total agent utility time, utility consumed time (ms), time exhaustif search ");
 
 		System.out.println("" + initialNeededSteps + " , " + finalNeededSteps + " , " + nbrV + " , " + totalTeT + " , "
-				+ indiceDep + " , " + totalNbrAgentInSystem + " , " + (long) (globalElapsedTime) + " , "
+				+ indiceDep + " , " + totalNbrAgentInSystem + " , " + (double) (globalElapsedTime) + " , "
 				+ totalAgentUtilityTime + " , " + uConsumedTime + " , "
-				+ (long) (initialNeededSteps * totalAgentUtilityTime));
+				+ (double) (initialNeededSteps * totalAgentUtilityTime));
 	}
 
+	public static String getExperimentTitle() {
+		return "Exp, Rnd, InitialSteps, FinalSteps, nbrV, nbrAg, T (ms), Total ag Utility Time, Util consumed T (ms), Time exhaustif search, difference in time ";
+	}
+	public static String getRoundResultValues() {
+		return String.format("%3s, %3s, %12s, %10s, %4s, %5s, %6s, %21s, %20s, %20s, %20s", 
+				experimentCounter, experimentRoundCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, totalNbrAgentInSystem,  
+				(double) (globalElapsedTime), (double) totalAgentUtilityTime,  (double) uConsumedTime, (double) (initialNeededSteps * totalAgentUtilityTime),
+				(double) ((double) (initialNeededSteps * totalAgentUtilityTime) - (double) ((double) (globalElapsedTime) + (double) uConsumedTime) ));
+	}
+	
+	
+	
+	
+	
+	
+	
+	public static String getExperimentMeanValuesTitle() {
+		return "minVal, maxVal, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time";
+	}
+	public static String getExperimentMeanValues() {
+		return String.format("%6s, %6s, %13s, %18s, %22s, %20s, %20s, %20s, %20s", 
+				minVal, maxVal, (int) utilityFactor, (double) exhaustifMeanvalue, (double) uTotalMeanValue, (double) uMeanValue, (double) elapsedTimeMeanValue, (double)(uMeanValue + elapsedTimeMeanValue), (double) (exhaustifMeanvalue - (uMeanValue + elapsedTimeMeanValue))  );
+	}
+	
 	public static void displayMiniRoundReasults() {
-		System.out.println(
-				"Ini steps, Final Steps, V, nbr Ag, consumed T (ms), total agent u T, u consumed T (ms), T exhaustif search ");
+		System.out.println("Exp, Rnd, IniSteps, FinSteps, V, nbrAg, T (ms), Tot U T, U consumed T (ms), T exhaustif search ");
 
-		System.out.println("" + (long) initialNeededSteps + " , " + finalNeededSteps + " , " + nbrV + " , "
-				+ totalNbrAgentInSystem + " , " + (long) (globalElapsedTime) + " , " + (long) totalAgentUtilityTime
-				+ " , " + (long) uConsumedTime + " , " + (long) (initialNeededSteps * totalAgentUtilityTime));
+		System.out.println("" + experimentCounter  + " , " + experimentRoundCounter + " , " + (double) initialNeededSteps + " , " + finalNeededSteps + " , " + nbrV + " , "
+				+ totalNbrAgentInSystem + " , " + (double) (globalElapsedTime) + " , " + (double) totalAgentUtilityTime
+				+ " , " + (double) uConsumedTime + " , " + (double) (initialNeededSteps * totalAgentUtilityTime));
 	}
 
 	public static void resetExperimentParameters() {
@@ -464,7 +502,7 @@ public class ResolverTimeConsuming {
 														// ayant plusieurs agents.
 		exploredTasks = new ArrayList<String>(); // les taches explor�es � un instant donn�.
 		// agentTab = { 6, 2, 5 };
-		agentUtilityTime = new int[agentTab.length];
+		agentUtilityTime = new double[agentTab.length];
 		totalAgentUtilityTime = 0;
 
 		sysEffeciency = 0;
@@ -486,17 +524,17 @@ public class ResolverTimeConsuming {
 	}
 
 	public static void resetExperimentMeansVariables() {
-		exhaustifMean = new long[30];
-		uTotalMean = new long[30];
-		uMean = new long[30];
-		elapsedTimeMean = new long[30];
+		exhaustifMean = new double[30];
+		uTotalMean = new double[30];
+		uMean = new double[30];
+		elapsedTimeMean = new double[30];
 	}
 
 	public static void collectMeansValueses(int round) {
-		exhaustifMean[round] = (long) (initialNeededSteps * totalAgentUtilityTime);
-		uTotalMean[round] = (long) totalAgentUtilityTime;
-		uMean[round] = (long) uConsumedTime;
-		elapsedTimeMean[round] = (long) globalElapsedTime;
+		exhaustifMean[round] = (double) (initialNeededSteps * totalAgentUtilityTime);
+		uTotalMean[round] = (double ) totalAgentUtilityTime;
+		uMean[round] = (double) uConsumedTime;
+		elapsedTimeMean[round] = (double) globalElapsedTime;
 	}
 
 	public static void computeExperimentMeansVariables() {
@@ -507,10 +545,10 @@ public class ResolverTimeConsuming {
 			elapsedTimeMeanValue += elapsedTimeMean[i];
 		}
 
-		exhaustifMeanvalue = (long) (exhaustifMeanvalue / 30);
-		uTotalMeanValue = (long) (uTotalMeanValue / 30);
-		uMeanValue = (long) (uMeanValue / 30);
-		elapsedTimeMeanValue = (long) (elapsedTimeMeanValue / 30);
+		exhaustifMeanvalue = (double) ((double)  exhaustifMeanvalue / (double)  30);
+		uTotalMeanValue = (double) ((double)  uTotalMeanValue / (double)  30);
+		uMeanValue = (double) ((double)  uMeanValue / (double)  30);
+		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  30);
 	}
 
 }
