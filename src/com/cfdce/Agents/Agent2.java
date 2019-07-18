@@ -425,9 +425,7 @@ public class Agent2 extends Agent {
 					// TODO Auto-generated catch block
 					e3.printStackTrace();
 				}
-			
-			
-		
+					
 			
 			int wait = ThreadLocalRandom.current().nextInt(1000, 10000);
 			

@@ -1,0 +1,9 @@
+diff a/src/FormationCoalitions/Discussion.java b/src/FormationCoalitions/Discussion.java	(rejected hunks)
+@@ -2271,6 +2271,7 @@
+ 		Coalition c = (Coalition) coalitionList.get(i);
+ 		for(int j=0; j<c.agentList.size(); j++){
+ 			String ag = (String) c.agentList.get(j);
++			if(!involvedAgents.contains(ag))
+ 				involvedAgents.add(ag);
+ 		}
+ 	}

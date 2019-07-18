@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -72,12 +73,7 @@ public class Discussion {
 	public ArrayList ConvDegreeH = new ArrayList();
 	
 	public ArrayList discRank = new ArrayList();
-
-
-	
-	
-	
-	
+ 
 	public int totalNodes;// le nombre total des Noeuds dans la discussion.
 	public int totalTasks;    // le nombre total de taches dans la discussion.
 	public int totalInvolvedAgents;   // le nombre total d'agents impliqu�s
@@ -277,8 +273,24 @@ for(int i=0; i<coalitionList.size(); i++){
 } // fin de for
 
 this.discussionFinalCost = cost;
+
+
+// -----------------------
+
+
+	
+
+
+// -----------------------
+
+
+
 } // fin de evaluateRealCost()
 //-------------------------------------------
+
+
+
+
 
 
 
