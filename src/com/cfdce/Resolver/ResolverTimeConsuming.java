@@ -87,6 +87,9 @@ public class ResolverTimeConsuming {
 	public static String filePath = "logs/Centralized/SimReasults.txt";
 	public static String filePathMeanValues = "logs/Centralized/SimReasultsMeanValues.txt";
 	
+	
+	public static int[] indiceTab = null;
+	
 
 	public static void main(String[] args) throws IOException, FIPAException, InterruptedException {
 
@@ -104,7 +107,7 @@ public class ResolverTimeConsuming {
 			utilityFactor = 20000;
 			
 			experimentRoundCounter = 1;
-			agentTab = getNewAgentsSet(1, 11, 3) ;
+			agentTab = getNewAgentsSet(4, 3);//getNewAgentsSet(1, 11, 3) ;
 			System.out.println("Agents set: "+Arrays.toString(agentTab));
 			System.out.println(getExperimentTitle());
 			
@@ -567,7 +570,43 @@ public class ResolverTimeConsuming {
 		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  30);
 	}
 	
-	public static int[] getNewAgentsSet(int min, int max, int tabSize) {
+	public static int[] getNewAgentsSet(int maxAgent, int tabSize) {
+		
+		if(indiceTab == null) {
+			indiceTab = new int[tabSize];
+			Arrays.fill(indiceTab,1);
+		}
+		
+		int ind = indiceTab.length - 2;
+		boolean icrement = false;
+		
+		indiceTab[tabSize-1] = indiceTab[tabSize-1] + 1;
+		if(indiceTab[tabSize-1] >= maxAgent) {
+			icrement = true;
+			indiceTab[tabSize-1] = 1;
+		}
+		
+		if(icrement)
+			while(ind >= 0) {
+				
+				int i = indiceTab[ind];
+				i++;
+				indiceTab[ind] = i;
+				
+				if(i >= maxAgent) {
+					i=1;
+					icrement = true;
+					indiceTab[ind] = i;
+					ind --;
+				}else {
+					break;
+				}
+			}
+		
+		return indiceTab;
+		
+		/*
+		
 		int[] agentTab =  new int[tabSize]; //{0, 0, 0}; 
 		Arrays.fill(agentTab,0);
 		boolean full = false;
@@ -599,6 +638,7 @@ public class ResolverTimeConsuming {
 			
 		}
 		return agentTab;
+		*/
 	}
 	
 	
