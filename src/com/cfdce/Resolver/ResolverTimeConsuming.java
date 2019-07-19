@@ -5,9 +5,12 @@ package com.cfdce.Resolver;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import com.cfdce.FormationCoalitions.Coalition;
@@ -80,22 +83,28 @@ public class ResolverTimeConsuming {
 	public static double uTotalMeanValue = 0;
 	public static double uMeanValue = 0;
 	public static double elapsedTimeMeanValue = 0;
+	public static String filePath = "logs/Centralized/SimReasults.txt";
+	public static String filePathMeanValues = "logs/Centralized/SimReasultsMeanValues.txt";
+	
 
 	public static void main(String[] args) throws IOException, FIPAException, InterruptedException {
 
 		// ------------------------------------------------------------------------------------------
 		// ------------------------------------------------------------------------------------------
-		
-		
+		System.out.println("Let's begin ... ");
 		//System.out.println(getExperimentTitle());
-		
+		writeToFile(filePath, getExperimentTitle());
+		writeToFile(filePathMeanValues, getExperimentMeanValuesTitle());
 		while (experimentCounter < maxExperiment) {
 			minVal =50;
 			maxVal =500;
 			utilityFactor = 20000;
 			
 			experimentRoundCounter = 1;
+			agentTab = getNewAgentsSet(1, 11, 3) ;
+			System.out.println("Agents set: "+Arrays.toString(agentTab));
 			System.out.println(getExperimentTitle());
+			
 			// ------------------------------------------------------------------------------------------
 			while (experimentRoundCounter < maxRounds) {
 				//System.out.println("- Experiment: " + experimentCounter + " - Round: " + experimentRoundCounter);
@@ -179,7 +188,9 @@ public class ResolverTimeConsuming {
 				//displayExperimentParameters();
 				//displayMiniRoundReasults();
 				
-				System.out.println(getRoundResultValues());
+				String values = getRoundResultValues();
+				writeToFile(filePath, values);
+				System.out.println(values);
 				
 				collectMeansValueses(experimentRoundCounter - 1);
 
@@ -188,12 +199,13 @@ public class ResolverTimeConsuming {
 			}
 			// ------------------------------------------------------------------------------------------
 			computeExperimentMeansVariables();
-
+			String meanValues = getExperimentMeanValues();
+			
 			System.out.println();
 			System.out.println(getExperimentMeanValuesTitle());
-			System.out.println(getExperimentMeanValues());
+			System.out.println(meanValues);
 			System.out.println();
-
+			writeToFile(filePathMeanValues, meanValues);
 			resetExperimentMeansVariables();
 			experimentCounter++;
 		}
@@ -549,6 +561,50 @@ public class ResolverTimeConsuming {
 		uTotalMeanValue = (double) ((double)  uTotalMeanValue / (double)  30);
 		uMeanValue = (double) ((double)  uMeanValue / (double)  30);
 		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  30);
+	}
+	
+	public static int[] getNewAgentsSet(int min, int max, int tabSize) {
+		int[] agentTab =  new int[tabSize]; //{0, 0, 0}; 
+		Arrays.fill(agentTab,0);
+		boolean full = false;
+		int indice = 0;
+		while(!full) {
+			
+			int ag  = (int) ThreadLocalRandom.current().nextInt(min, max);  
+			
+			 full = true;
+			for (int n : agentTab) {
+	            if (n == ag) {
+	                full = false;
+	                break;
+	            }
+	            
+	            if (n == 0) {
+	                full = false;
+	                break;
+	            }
+			 }
+	            
+	            agentTab[indice] = ag;
+	            indice ++;
+	            
+	            if(indice == tabSize) {
+	            	full = true;
+	            }
+	       
+			
+		}
+		return agentTab;
+	}
+	
+	
+	public static void writeToFile(String fileName, String text) throws IOException {
+		FileWriter fStream = new FileWriter(fileName, true);
+		PrintWriter out = new PrintWriter(fStream);
+		out.println(text);
+		out.flush();
+		out.close();
+		fStream.close();
 	}
 
 }
