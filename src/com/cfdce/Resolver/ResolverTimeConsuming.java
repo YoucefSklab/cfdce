@@ -4,6 +4,7 @@
 package com.cfdce.Resolver;
 
 import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,6 +94,8 @@ public class ResolverTimeConsuming {
 		// ------------------------------------------------------------------------------------------
 		System.out.println("Let's begin ... ");
 		//System.out.println(getExperimentTitle());
+		resetFile(filePath);
+		resetFile(filePathMeanValues);
 		writeToFile(filePath, getExperimentTitle());
 		writeToFile(filePathMeanValues, getExperimentMeanValuesTitle());
 		while (experimentCounter < maxExperiment) {
@@ -481,10 +484,11 @@ public class ResolverTimeConsuming {
 	
 	
 	public static String getExperimentMeanValuesTitle() {
-		return "minVal, maxVal, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time";
+		return "Exp, InitialSteps, FinalSteps, nbrV, nbrAg, minVal, maxVal, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time";
 	}
 	public static String getExperimentMeanValues() {
-		return String.format("%6s, %6s, %13s, %18s, %22s, %20s, %20s, %20s, %20s", 
+		return String.format("%3s, %12s, %10s, %4s, %5s, %6s, %6s, %13s, %18s, %22s, %20s, %20s, %20s, %20s", 
+				experimentCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, totalNbrAgentInSystem,  
 				minVal, maxVal, (int) utilityFactor, (double) exhaustifMeanvalue, (double) uTotalMeanValue, (double) uMeanValue, (double) elapsedTimeMeanValue, (double)(uMeanValue + elapsedTimeMeanValue), (double) (exhaustifMeanvalue - (uMeanValue + elapsedTimeMeanValue))  );
 	}
 	
@@ -605,6 +609,11 @@ public class ResolverTimeConsuming {
 		out.flush();
 		out.close();
 		fStream.close();
+	}
+	
+	public static void resetFile(String fileName) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		pw.close();
 	}
 
 }
