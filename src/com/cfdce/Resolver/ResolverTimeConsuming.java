@@ -24,13 +24,6 @@ import jade.domain.FIPAException;
  */
 public class ResolverTimeConsuming {
 
-	public static int maxExperiment = 200;
-	public static int maxRounds = 31;
-	public static int roundCounter = 1;
-	public static boolean displayComments = false;
-	public static int experimentCounter = 1;
-	public static int experimentRoundCounter = 1;
-
 	// needed parameters per round
 	public static long totalNbrAgentInSystem = 0;
 	public static long initialNeededSteps = 1;
@@ -87,8 +80,16 @@ public class ResolverTimeConsuming {
 	public static String filePath = "logs/Centralized/SimReasults.txt";
 	public static String filePathMeanValues = "logs/Centralized/SimReasultsMeanValues.txt";
 	
-	
+	public static int nbrAgents = 2;
+	public static int totalPlans = 11;
 	public static int[] indiceTab = null;
+	
+	public static int maxExperiment = 90000;
+	public static int maxRounds = 31;
+	public static int roundCounter = 1;
+	public static boolean displayComments = false;
+	public static int experimentCounter = 1;
+	public static int experimentRoundCounter = 1;
 	
 
 	public static void main(String[] args) throws IOException, FIPAException, InterruptedException {
@@ -101,15 +102,16 @@ public class ResolverTimeConsuming {
 		resetFile(filePathMeanValues);
 		writeToFile(filePath, getExperimentTitle());
 		writeToFile(filePathMeanValues, getExperimentMeanValuesTitle());
+		System.out.println(getExperimentMeanValuesTitle());
 		while (experimentCounter < maxExperiment) {
 			minVal =50;
 			maxVal =500;
 			utilityFactor = 20000;
 			
 			experimentRoundCounter = 1;
-			agentTab = getNewAgentsSet(4, 3);//getNewAgentsSet(1, 11, 3) ;
-			System.out.println("Agents set: "+Arrays.toString(agentTab));
-			System.out.println(getExperimentTitle());
+			agentTab = getNewAgentsSet(totalPlans, nbrAgents);//getNewAgentsSet(1, 11, 3) ;
+			//System.out.println("Agents set: "+Arrays.toString(agentTab));
+			//System.out.println(getExperimentTitle());
 			
 			// ------------------------------------------------------------------------------------------
 			while (experimentRoundCounter < maxRounds) {
@@ -140,7 +142,7 @@ public class ResolverTimeConsuming {
 				tempIndiceMax = (ArrayList<Integer>) indiceMax.clone();
 				tempIndiceMin = (ArrayList<Integer>) indiceMin.clone();
 
-				displayTasksExclusiveTasksSets();
+				//displayTasksExclusiveTasksSets();
 
 				computeInitialNeededSteps();
 
@@ -148,7 +150,8 @@ public class ResolverTimeConsuming {
 
 				boolean end = false;
 				while (!end) {
-					displayRoundHeader();
+					// display the experiment header
+					//displayRoundHeader();
 					setTimeCounter();
 
 					resetAgentsCoalitions();
@@ -185,10 +188,12 @@ public class ResolverTimeConsuming {
 					updateElapsedTime();
 
 					System.gc();
+					/*
 					if (finalNeededSteps >= limit || end) {
 						end = true;
 						System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 					}
+					*/
 				}
 
 				//displayExperimentParameters();
@@ -196,7 +201,7 @@ public class ResolverTimeConsuming {
 				
 				String values = getRoundResultValues();
 				writeToFile(filePath, values);
-				System.out.println(values);
+				//System.out.println(values);
 				
 				collectMeansValueses(experimentRoundCounter - 1);
 
@@ -207,10 +212,10 @@ public class ResolverTimeConsuming {
 			computeExperimentMeansVariables();
 			String meanValues = getExperimentMeanValues();
 			
-			System.out.println();
-			System.out.println(getExperimentMeanValuesTitle());
+			//System.out.println();
+			//System.out.println(getExperimentMeanValuesTitle());
 			System.out.println(meanValues);
-			System.out.println();
+			//System.out.println();
 			writeToFile(filePathMeanValues, meanValues);
 			resetExperimentMeansVariables();
 			experimentCounter++;
@@ -586,14 +591,18 @@ public class ResolverTimeConsuming {
 			indiceTab[tabSize-1] = 1;
 		}
 		
-		if(icrement)
+		boolean endOfExperiment = false;
+		
+		if(icrement) {
 			while(ind >= 0) {
-				
 				int i = indiceTab[ind];
 				i++;
 				indiceTab[ind] = i;
 				
 				if(i >= maxAgent) {
+					if(indiceTab[0] == maxAgent ) {
+						endOfExperiment = true;
+					}
 					i=1;
 					icrement = true;
 					indiceTab[ind] = i;
@@ -603,42 +612,14 @@ public class ResolverTimeConsuming {
 				}
 			}
 		
-		return indiceTab;
-		
-		/*
-		
-		int[] agentTab =  new int[tabSize]; //{0, 0, 0}; 
-		Arrays.fill(agentTab,0);
-		boolean full = false;
-		int indice = 0;
-		while(!full) {
-			
-			int ag  = (int) ThreadLocalRandom.current().nextInt(min, max);  
-			
-			 full = true;
-			for (int n : agentTab) {
-	            if (n == ag) {
-	                full = false;
-	                break;
-	            }
-	            
-	            if (n == 0) {
-	                full = false;
-	                break;
-	            }
-			 }
-	            
-	            agentTab[indice] = ag;
-	            indice ++;
-	            
-	            if(indice == tabSize) {
-	            	full = true;
-	            }
-	       
-			
+			if(endOfExperiment) {
+				System.out.println("agent incremented");
+				nbrAgents++;
+				indiceTab = null;
+				indiceTab = getNewAgentsSet(maxAgent, nbrAgents);
+			}		
 		}
-		return agentTab;
-		*/
+		return indiceTab;
 	}
 	
 	
