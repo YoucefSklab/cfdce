@@ -1,3 +1,0 @@
-,
-*+-Case, Ini Steps, Final Steps, setV, Tot TeT, Tot TeT Adition, Nbr Ag, Tot Alt, Tot Nbr Ag,  Time, sysEffeciency
-0 , 1913187600000 , 20226 , 12 , 0.36792454 , 78 , 4 , 24 , 4 , 169256 , 76.75001

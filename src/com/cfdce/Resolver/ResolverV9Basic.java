@@ -264,8 +264,8 @@ for(int con = 1; con<2; con++){
 			
 	
 	
-			task.combPossibilities = MethodesCollection.formCoalitionStr(task.agentList, true);
-
+			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
+			
 			if(nbrAgent <task.agentList.size())
 				nbrAgent = task.agentList.size();
 			

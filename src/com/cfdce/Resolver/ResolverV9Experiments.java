@@ -345,7 +345,7 @@ for(int con = 0; con<13; con++){
 			exclusiveList.add(itsExclusive);
 			
 	
-			task.combPossibilities = MethodesCollection.formCoalitionStr(task.agentList, true);
+			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 
 			if(nbrAgent <task.agentList.size())
 				nbrAgent = task.agentList.size();
@@ -678,7 +678,7 @@ for(int con = 0; con<13; con++){
 							}
 							
 						}
-						task.combPossibilities = MethodesCollection.formUpdateCoalitionStr(newAgentList, true);
+						task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 						tempIndiceMax.set(h, task.combPossibilities.size());
 							
 					}

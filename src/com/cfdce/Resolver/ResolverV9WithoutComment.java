@@ -96,7 +96,7 @@ public class ResolverV9WithoutComment {
 
 			exclusiveList.add(itsExclusive);
 
-			task.combPossibilities = MethodesCollection.formCoalitionStr(task.agentList, true);
+			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 
 			if (nbrAgent < task.agentList.size())
 				nbrAgent = task.agentList.size();
@@ -308,7 +308,9 @@ public class ResolverV9WithoutComment {
 						}
 
 					}
-					task.combPossibilities = MethodesCollection.formUpdateCoalitionStr(newAgentList, true);
+					
+					task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
+					
 					tempIndiceMax.set(h, task.combPossibilities.size());
 
 				}

@@ -363,7 +363,7 @@ for(int con = indPlans; con<14; con++){
 			exclusiveList.add(itsExclusive);
 			
 	
-			task.combPossibilities = MethodesCollection.formCoalitionStr(task.agentList, true);
+			task.combPossibilities = (new MethodesCollection()).formCoalitionStr(task.agentList, true);
 
 			if(nbrAgent <task.agentList.size())
 				nbrAgent = task.agentList.size();

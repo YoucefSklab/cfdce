@@ -127,7 +127,7 @@ public class ResolverV7 {
 			// System.out.println(" -> The agents having the task:
 			// "+task.agentList.toString());
 
-			task.combPossibilities = MethodesCollection.formCoalitionStr(task.agentList, true);
+			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 
 			//task.tempCombPossibilities = (ArrayList) task.combPossibilities.clone();
 			// System.out.println(" -> Liste des possibilit�s (taille):
@@ -452,7 +452,7 @@ public class ResolverV7 {
 							}
 							
 						}
-						task.combPossibilities = MethodesCollection.formUpdateCoalitionStr(newAgentList, true);
+						task.combPossibilities = new MethodesCollection().formUpdateCoalitionStr(newAgentList, true);
 						tempIndiceMax.set(h, task.combPossibilities.size());
 					
 						System.out.println("						-> : Ses nouvelles possibiolit�s: "+task.combPossibilities.toString());

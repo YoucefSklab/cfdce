@@ -30,9 +30,9 @@ import jade.domain.FIPAException;
 
 public class MethodesCollection {
 
-	// public static Logger logger =
+	// public  Logger logger =
 	// LoggerFactory.getLogger(MethodesCollection.class);
-	static int pathNbr = 2;
+	 int pathNbr = 2;
 	
 
 	/**
@@ -256,7 +256,7 @@ public class MethodesCollection {
 	 *            Liste des �l�ments de l'ensemble
 	 * @return Liste des partitions
 	 */
-	public static ArrayList formCoalitionStr(ArrayList listeElement, boolean oneInstance) {
+	public  ArrayList formCoalitionStr(ArrayList listeElement, boolean oneInstance) {
 		ArrayList listeCoalition = new ArrayList();
 		ArrayList listeFinale = new ArrayList();
 
@@ -373,7 +373,7 @@ public class MethodesCollection {
 	 *            Liste des �l�ments de l'ensemble
 	 * @return Liste des partitions
 	 */
-	public static ArrayList formCoalitionStr(ArrayList listeElement) {
+	public  ArrayList formCoalitionStr(ArrayList listeElement) {
 		ArrayList listeCoalition = new ArrayList();
 		ArrayList listeFinale = new ArrayList();
 		/*
@@ -472,7 +472,7 @@ public class MethodesCollection {
 	 *            Liste des �l�ments de l'ensemble
 	 * @return Liste des partitions
 	 */
-	public static ArrayList formUpdateCoalitionStr(ArrayList listeElement,
+	public ArrayList formUpdateCoalitionStr(ArrayList listeElement,
 			boolean oneInstance) {
 		ArrayList listeCoalition = new ArrayList();
 		ArrayList listeFinale = new ArrayList();
@@ -530,7 +530,7 @@ public class MethodesCollection {
 				int posi2 = listeElement.indexOf(listEl.get(listEl.size() - 1));
 			//	System.out.println("-> ->"+posi1);
 				if (posi2 + 1 < listeElement.size()) 
-				//	if (posi1 > 0)
+					if (posi1 > 0)
 					for( int i = posi1; i < listeElement.size(); i++ ) {
 
 						if (!listEl.contains(listeElement.get(i))) {
@@ -583,7 +583,7 @@ public class MethodesCollection {
 	 *            Liste des �l�ments de l'ensemble
 	 * @return Liste des partitions
 	 */
-	public static ArrayList formCoalition(ArrayList listeElement) {
+	public ArrayList formCoalition(ArrayList listeElement) {
 		ArrayList listeCoalition = new ArrayList();
 		/*
 		 * if(listeElement.size()==2) { listeCoalition.add((ArrayList)
@@ -649,7 +649,7 @@ public class MethodesCollection {
 	 *            Liste des �l�ments de l'ensemble
 	 * @return Liste des partitions
 	 */
-	public static ArrayList formCoalition(ArrayList listeElement,
+	public ArrayList formCoalition(ArrayList listeElement,
 			int fixedElement) {
 		ArrayList listeCoalition = new ArrayList();
 		ArrayList finalList = new ArrayList();
@@ -983,7 +983,7 @@ public class MethodesCollection {
 
 	}
 
-	public static final Comparator<Discussion>	ASCENDING_COMPARATOR_byIndiCost		= new Comparator<Discussion>() {
+	public final Comparator<Discussion>	ASCENDING_COMPARATOR_byIndiCost		= new Comparator<Discussion>() {
 
 																						// Overriding
 																						// the
@@ -1006,7 +1006,7 @@ public class MethodesCollection {
 																						}
 																					};
 
-	public static final Comparator<Discussion>	DESCENDING_COMPARATOR_byIndiCost	= new Comparator<Discussion>() {
+	public final Comparator<Discussion>	DESCENDING_COMPARATOR_byIndiCost	= new Comparator<Discussion>() {
 
 																						// Overriding
 																						// the
@@ -1168,7 +1168,7 @@ public class MethodesCollection {
 	 * @param str
 	 * @return
 	 */
-	public static ArrayList getArrayListFromStr(String str) {
+	public ArrayList getArrayListFromStr(String str) {
 
 		ArrayList Arraylist = new ArrayList();
 
@@ -2332,7 +2332,7 @@ public void	setTasksExclusiveTasks(ArrayList tasksList, ArrayList agentList){
 	
 	
 
-public static void savePlan(int planToCopy, int planToSave) throws FileNotFoundException{
+public  void savePlan(int planToCopy, int planToSave) throws FileNotFoundException{
 	
 	PrintWriter fToSave = null;
 	try {
