@@ -85,17 +85,17 @@ public static void main(String[] args) throws IOException {
   
   
   
-  n1.add("A1"); n1.add("A2"); n1.add("A3"); n1.add("A4");   // n1.add("A5"); n1.add("A6"); // n1.add("A7"); n1.add("A8");  n1.add("A9"); n1.add("A10"); n1.add("A11"); n1.add("A12"); n1.add("A13"); n1.add("A14");n1.add("A15");  
+  n1.add("A1"); n1.add("A2"); n1.add("A3"); // n1.add("A4");   // n1.add("A5"); n1.add("A6"); // n1.add("A7"); n1.add("A8");  n1.add("A9"); n1.add("A10"); n1.add("A11"); n1.add("A12"); n1.add("A13"); n1.add("A14");n1.add("A15");  
   
-  n2.add("B"); n2.add("C"); n2.add("D");  n2.add("E");         //  n2.add("F");      n2.add("B1"); n2.add("C1"); n2.add("D1");  n3.add("Q1");
+  n2.add("B"); n2.add("C"); n2.add("D"); // n2.add("E");         //  n2.add("F");      n2.add("B1"); n2.add("C1"); n2.add("D1");  n3.add("Q1");
   
-   n3.add("G"); n3.add("H"); n3.add("I");  n3.add("J");      //  n3.add("K");     n3.add("N1"); n3.add("O1"); n3.add("P1");  n3.add("U1");
+  n3.add("G"); n3.add("H"); n3.add("I"); // n3.add("J");      //  n3.add("K");     n3.add("N1"); n3.add("O1"); n3.add("P1");  n3.add("U1");
   
-  n4.add("L"); n4.add("M"); n4.add("N");  n4.add("O");      //  n4.add("P");       n4.add("H1"); n4.add("I1"); n4.add("J1");  n4.add("R1");  
+  n4.add("L"); n4.add("M"); n4.add("N"); // n4.add("O");      //  n4.add("P");       n4.add("H1"); n4.add("I1"); n4.add("J1");  n4.add("R1");  
    
-  n5.add("Q"); n5.add("R"); n5.add("S");  n5.add("T");      //  n5.add("U");       n5.add("V1");  n5.add("W1");  n5.add("X1");  n5.add("Y1"); 
+  n5.add("Q"); n5.add("R"); n5.add("S"); // n5.add("T");      //  n5.add("U");       n5.add("V1");  n5.add("W1");  n5.add("X1");  n5.add("Y1"); 
   
-  n6.add("V"); n6.add("W"); n6.add("X");  n6.add("Y");      //  n6.add("Z");    n6.add("Q1"); n6.add("R1"); n6.add("S1");  n6.add("T1");  n6.add("U1");  
+  n6.add("V"); n6.add("W"); n6.add("X"); // n6.add("Y");      //  n6.add("Z");    n6.add("Q1"); n6.add("R1"); n6.add("S1");  n6.add("T1");  n6.add("U1");  
   
  // n7.add("E1"); n7.add("F1"); n7.add("G1");  n7.add("S1");       //              n7.add("E2"); n7.add("F2"); n7.add("G2"); n7.add("S2");
   
@@ -330,8 +330,8 @@ public static void main(String[] args) throws IOException {
  
    sourceCounter++;
 
-   startTasks =  endTasks = ThreadLocalRandom.current().nextInt(0, 7);
-   endTasks = ThreadLocalRandom.current().nextInt(12, 23);
+   startTasks =  endTasks = ThreadLocalRandom.current().nextInt(0, 3);
+   endTasks = ThreadLocalRandom.current().nextInt(9, 16);
   
    
    if(destinationCounter>20){

@@ -112,6 +112,7 @@ public class ResolverTimeConsuming {
 			
 			experimentRoundCounter = 1;
 			agentTab = getNewAgentsSet(totalPlans, nbrAgents);//getNewAgentsSet(1, 11, 3) ;
+			agentTab =  new int[] {1,2,1,999};
 			//System.out.println("Agents set: "+Arrays.toString(agentTab));
 			System.out.println(getExperimentTitle());
 			
