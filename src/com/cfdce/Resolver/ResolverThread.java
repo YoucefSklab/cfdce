@@ -129,7 +129,8 @@ public class ResolverThread implements Runnable {
 			utilityFactor = 20000;
 			
 			experimentRoundCounter = 1;
-			agentTab = getNewAgentsSet(totalPlans, nbrAgents);//getNewAgentsSet(1, 11, 3) ;
+			//agentTab = getNewAgentsSet(totalPlans, nbrAgents);//getNewAgentsSet(1, 11, 3) ;
+			agentTab = getNewRundomAgentsSet(agentTab, 2, 800);
 			//System.out.println("Agents set: "+Arrays.toString(agentTab));
 			System.out.println(getExperimentTitle());
 			
@@ -139,6 +140,7 @@ public class ResolverThread implements Runnable {
 				resetExperimentParameters();
 
 				try {
+					
 					agentList = new MethodesCollection().loadPlans(agentTab);
 				} catch (IOException e) {e.printStackTrace();}
 				allTasksList = new MethodesCollection().getTasksList(agentList);
@@ -648,12 +650,25 @@ public class ResolverThread implements Runnable {
 		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  30);
 	}
 	
+	
+	public  int[] getNewRundomAgentsSet(int[] tabIndice, int minPlans, int maxPlans) {
+		
+		for(int i=0; i<tabIndice.length; i++) {
+			tabIndice[i] = ThreadLocalRandom.current().nextInt(minPlans, maxPlans);
+		}
+		
+		return tabIndice;
+	}
+	
+	
 	public  int[] getNewAgentsSet(int maxAgent, int tabSize) {
 		
 		if(indiceTab == null) {
 			indiceTab = new int[tabSize];
 			Arrays.fill(indiceTab,1);
 		}
+		
+		
 		
 		int ind = indiceTab.length - 2;
 		boolean icrement = false;

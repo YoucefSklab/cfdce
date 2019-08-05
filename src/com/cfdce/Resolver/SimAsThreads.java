@@ -28,8 +28,8 @@ public class SimAsThreads  {
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5};
 		newThread("th2", 6, 10, tabIndice);
 		
-	//	tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1};
-	//	newThread("th3", 6, 10, tabIndice);
+		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1};
+		newThread("th3", 6, 10, tabIndice);
 	
 		/*
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1};

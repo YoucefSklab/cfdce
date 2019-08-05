@@ -47,7 +47,13 @@ public class MethodesCollection {
 		ArrayList agentList = new ArrayList();
 
 		for( int i = 0; i < agentTab.length; i++ ) {
+			
+			System.out.println("- load plan : " + agentTab[i]);
+			
 			AgentModel agent = new AgentModel(getPlanByNbr(agentTab[i],i));
+			
+			
+			
 			for( Edge ed : agent.plan.getEachEdge() ) {
 				if (!agent.tasksList.contains(ed.getId()))
 					agent.tasksList.add(ed.getId());
