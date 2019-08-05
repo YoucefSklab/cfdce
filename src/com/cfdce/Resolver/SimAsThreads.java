@@ -1,7 +1,9 @@
 package com.cfdce.Resolver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SimAsThreads  {
 
@@ -12,16 +14,16 @@ public class SimAsThreads  {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int nbrThreads = 100;
-		/*
+		int nbrThreads = 10;
+		
 		for(int i=0; i<nbrThreads; i++) {
 			System.out.println("run the thread : "+i);
-			ResolverThread R1 = new ResolverThread("Thread number "+i) ;
-			R1.nbrAgents = 3;
-			R1.totalPlans = 10;
-		    R1.start();
+			int[] indiceTab = new int[ThreadLocalRandom.current().nextInt(3, 10)];
+			Arrays.fill(indiceTab,1);
+		    newThread("Thread_"+i, 10, 10, indiceTab);
 		}
-		*/
+		
+		/*
 		int[] tabIndice = { 5, 1, 5, 1, 5};
 		//newThread("th1", 5, 10, tabIndice);
 		

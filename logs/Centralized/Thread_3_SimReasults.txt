@@ -1,0 +1,2 @@
+Exp, Rnd, InitialSteps, FinalSteps, nbrV, nbrAg, dependanceDistance, T (ms), Total ag Utility Time, Util consumed T (ms), Time exhaustif search, difference in time 
+  1,   1,     288000.0,      148.0,   11,     4,              312.0, 2304.0,                0.0424,    6.232800000000024,              12211.2,    9900.967200000001
