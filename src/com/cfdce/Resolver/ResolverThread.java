@@ -102,6 +102,7 @@ public class ResolverThread implements Runnable {
 		this.totalPlans = totalPlans;
 		this.threadName = name;
 		this.indiceTab = indiceTab;
+		this.agentTab = indiceTab;
 	}
 
 	//public  void main(int[] args) throws IOException, FIPAException, InterruptedException {
@@ -653,6 +654,7 @@ public class ResolverThread implements Runnable {
 	
 	public  int[] getNewRundomAgentsSet(int[] tabIndice, int minPlans, int maxPlans) {
 		
+				
 		for(int i=0; i<tabIndice.length; i++) {
 			tabIndice[i] = ThreadLocalRandom.current().nextInt(minPlans, maxPlans);
 		}
