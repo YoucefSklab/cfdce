@@ -60,18 +60,10 @@ public class Generator8 {
 
 	
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-
+	
 		//System.out.println("Bonjour, ceci est un g�n�rateur de Plans : ");
 
 	
-		
-		
-
-		//-----------------------------------------------------------------------------------------------
-		// G�n�ration d'un Plan :
-		//----------------------
-	    
 		 // G�n�rer un graph  
 		 Graph gra = new SingleGraph("grid");
 		 
@@ -118,19 +110,19 @@ public class Generator8 {
 		 
 		 n1.add("A1"); n1.add("A2"); n1.add("A3"); n1.add("A4"); n1.add("A5"); n1.add("A6"); // n1.add("A7"); n1.add("A8");  n1.add("A9"); n1.add("A10"); n1.add("A11"); n1.add("A12"); n1.add("A13"); n1.add("A14");n1.add("A15");  
 		 
-		 n2.add("B"); n2.add("C"); n2.add("D");  n2.add("E"); //  n2.add("F");      n2.add("B1"); n2.add("C1"); n2.add("D1");  n3.add("Q1");
+		 n2.add("B"); n2.add("C"); n2.add("D");  n2.add("E");   n2.add("F");      n2.add("B1"); n2.add("C1"); n2.add("D1");  n3.add("Q1");
 		 
-		  n3.add("G"); n3.add("H"); n3.add("I");  n3.add("J"); // n3.add("K");     n3.add("N1"); n3.add("O1"); n3.add("P1");  n3.add("U1");
+		  n3.add("G"); n3.add("H"); n3.add("I");  n3.add("J");  n3.add("K");     n3.add("N1"); n3.add("O1"); n3.add("P1");  n3.add("U1");
 		 
-		 n4.add("L"); n4.add("M"); n4.add("N");  n4.add("O"); // n4.add("P");       n4.add("H1"); n4.add("I1"); n4.add("J1");  n4.add("R1");  
+		 n4.add("L"); n4.add("M"); n4.add("N");  n4.add("O");  n4.add("P");       n4.add("H1"); n4.add("I1"); n4.add("J1");  n4.add("R1");  
 		  
-		 n5.add("Q"); n5.add("R"); n5.add("S");  n5.add("T"); // n5.add("U");       n5.add("V1");  n5.add("W1");  n5.add("X1");  n5.add("Y1"); 
+		 n5.add("Q"); n5.add("R"); n5.add("S");  n5.add("T");  n5.add("U");       n5.add("V1");  n5.add("W1");  n5.add("X1");  n5.add("Y1"); 
 		 
-		 n6.add("V"); n6.add("W"); n6.add("X");  n6.add("Y"); // n6.add("Z");   
+		 n6.add("V"); n6.add("W"); n6.add("X");  n6.add("Y");  n6.add("Z");   	n6.add("Q1"); n6.add("R1"); n6.add("S1");  n6.add("T1");  n6.add("U1");  
 		 
-		 n7.add("E1"); n7.add("F1"); n7.add("G1");  n7.add("S1"); //              n7.add("E2"); n7.add("F2"); n7.add("G2"); n7.add("S2");
+		 n7.add("E1"); n7.add("F1"); n7.add("G1");  n7.add("S1");               n7.add("E2"); n7.add("F2"); n7.add("G2"); n7.add("S2");
 		 
-		 n8.add("K1"); n8.add("L1"); n8.add("M1");  n8.add("T1"); //             n8.add("K2"); n8.add("L2"); n8.add("M2");  n8.add("T2"); 
+		 n8.add("K1"); n8.add("L1"); n8.add("M1");  n8.add("T1");              n8.add("K2"); n8.add("L2"); n8.add("M2");  n8.add("T2"); 
 		 
 		 n9.add("Z1"); n9.add("Z2"); n9.add("Z3"); n9.add("Z4"); n9.add("Z5"); n9.add("Z6");
 		 
@@ -153,8 +145,6 @@ public class Generator8 {
 		// gra.addAttribute("ui.stylesheet", "url('file:config/Modele1.css')"); 
 		 gra.addAttribute("ui.quality"); 
 		 gra.addAttribute("ui.antialias"); 
-		 
-		
 		 
 		 gra.display();
 		
@@ -378,7 +368,7 @@ public class Generator8 {
 			
 			
 		 
-			 System.out.println("-------------------- Ici");
+		System.out.println("-------------------- Ici");
 		 //-----------------------------------------------------------------------------------------
 		 //-----------------------------------------------------------------------------------------
 		 
@@ -398,7 +388,7 @@ public class Generator8 {
 						
 		 for(Edge e:gra.getEachEdge()) {
 			 e.setAttribute("ui.label", e.getSourceNode().getLabel("ui.label")+""+e.getTargetNode().getLabel("ui.label"));
-			 e.addAttribute("extraCost", ThreadLocalRandom.current().nextInt(100, 150));
+			 e.addAttribute("extraCost", ThreadLocalRandom.current().nextInt(80, 150));
 		}
 						
 		
@@ -414,7 +404,8 @@ public class Generator8 {
 			     String st2 = e.getTargetNode().getLabel("ui.label").toString();
 				 g3.addEdge(label, e.getSourceNode().getLabel("ui.label").toString(), e.getTargetNode().getLabel("ui.label").toString(), true  );
 				 Edge ed = g3.getEdge(label);
-				 ed.addAttribute("extraCost", e.getAttribute("extraCost"));
+				 int costValue =  Integer.parseInt(e.getAttribute("extraCost").toString());
+				 ed.addAttribute("extraCost", costValue);
 		 }
 	  	
 	
@@ -490,9 +481,10 @@ public class Generator8 {
 				
 				//startTasks = ThreadLocalRandom.current().nextInt(minStartTasks, maxStartTasks + 1);
 				
-				if(sourceCounter>15){
+				if(sourceCounter>10){
 					sourceCounter = 0;
 					}
+				
 				startTasks = sourceCounter;
 				sourceCounter++;
 				
@@ -503,9 +495,10 @@ public class Generator8 {
 				endTasks = ThreadLocalRandom.current().nextInt(50, 70);
 			 //	System.out.println("La tache de fin est : "+endTasks);
 				
-				if(destinationCounter>39){
-					destinationCounter = 30;
+				if(destinationCounter>20){
+					destinationCounter = 15;
 					}
+				destinationCounter = sourceCounter + 5;
 				endTasks = destinationCounter;
 				destinationCounter++;	
 				
@@ -571,11 +564,11 @@ public class Generator8 {
 				
 					 System.out.println(" ->All paths = :"+allPaths.size());
 						
-					if(allPaths.size()>20){			
+					if(allPaths.size()>2){			
 						alternativeList.clear();
-						//alternativeNbr = ThreadLocalRandom.current().nextInt(2, allPaths.size()+1);
-						alternativeNbr = ThreadLocalRandom.current().nextInt(5, ((allPaths.size() % 5 )+15));
 						
+						//alternativeNbr = ThreadLocalRandom.current().nextInt(3, ((allPaths.size() % 5 )+5));
+						alternativeNbr = 5;
 						
 						
 						 System.out.println(" ->Le nombre d'alternatives � mettre dans le plan est :"+alternativeNbr +"         ---> De: "+allPaths.size());
@@ -616,7 +609,7 @@ public class Generator8 {
 							     String st2 = e.getTargetNode().getLabel("ui.label").toString();
 							     finalGraph.addEdge(label, e.getSourceNode().getLabel("ui.label").toString(), e.getTargetNode().getLabel("ui.label").toString(), true  );
 							     Edge ed = finalGraph.getEdge(label);
-							     ed.addAttribute("extraCost", e.getAttribute("extraCost"));
+							     ed.addAttribute("extraCost", e.getAttribute("extraCost").toString());
 							 } // fin de for
 							
 						} // fin de for
@@ -680,7 +673,7 @@ public class Generator8 {
 														
 						} // fin de while
 						
-						if((finalGraph.getEdgeCount()>=10) && (finalGraph.getEdgeCount()<=20)){
+						if((finalGraph.getEdgeCount()>=5) && (finalGraph.getEdgeCount()<=10)){
 						//if(finalGraph.getNodeCount()>=6){
 							//finalGraph.display();
 							
@@ -691,7 +684,10 @@ public class Generator8 {
 							//*********************************************************************
 							//----------------------------------------------------------------------
 							//--------------------------------------------------------------------- 
-							System.out.println(saveAsMethode(finalGraph, "Plan_"+planNbr, planNbr, "url('file:config/Modele1.css')", agColor));
+							//System.out.println(saveAsMethode(finalGraph, "Plan_"+planNbr, planNbr, "url('file:config/Modele1.css')", agColor));
+							saveAsFile(finalGraph, "Plan_"+planNbr, planNbr, "url('file:config/Modele1.css')", agColor);
+							
+							
 							//(Graph g, String Name, int planNbr,String cssPath)
 							planNbr++;
 							
@@ -946,6 +942,32 @@ public static String NewLine(int Nbr){
 
 //**---------------------------------------------------------------------
 
+
+public static void saveAsFile(Graph g, String Name, int planNbr,String cssPath, String agColor){
+	PrintWriter f = null;
+	try {
+		f = new PrintWriter(new FileWriter("Plans/Plan_Agent_"+planNbr+".txt"));
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	
+	
+	for(Edge e:g.getEachEdge()) {
+		
+		 String edgeLabel = e.getId();
+		 String n1 = e.getSourceNode().getId();
+		 String n2 = e.getTargetNode().getId();
+		
+		 
+		 f.println(n1+","+n2+";"+e.getAttribute("extraCost"));
+			
+	 }
+	
+	
+	f.close();
+	
+}
 
 
 public static String saveAsMethode(Graph g, String Name, int planNbr,String cssPath, String agColor){
