@@ -34,7 +34,7 @@ public class ResolverV9WithoutComment {
 
 	public static int limit = 8962624;
 	public static int sleepTime = 1; 
-	public static int[] agentTab = { 6, 2, 5 };
+	public static int[] agentTab = { 1, 2, 3, 4, 5, 6 };
 
 	public static float sysEffeciency = 0;
 	public static String agentNames = "";

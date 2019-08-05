@@ -1,0 +1,1 @@
+Exp, InitialSteps, FinalSteps, nbrV, nbrAg, minVal, maxVal, Dependance  Distance, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time

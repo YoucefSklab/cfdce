@@ -22,15 +22,40 @@ public class SimAsThreads  {
 		    R1.start();
 		}
 		*/
-		int[] tabIndice = { 4, 5,7};
-		newThread("th1", 3, 10, tabIndice);
-		newThread("th2", 3, 10, tabIndice);
-		newThread("th3", 3, 10, tabIndice);
-		newThread("th4", 3, 10, tabIndice);
-		tabIndice = new int[] {4, 5, 7, 6};
-		newThread("th6", 4, 20, tabIndice);
-		newThread("th7", 4, 20, tabIndice);
-		newThread("th8", 4, 20, tabIndice);
+		int[] tabIndice = { 5, 1, 5, 1, 5};
+		//newThread("th1", 5, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5};
+		newThread("th2", 6, 10, tabIndice);
+		
+	//	tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1};
+	//	newThread("th3", 6, 10, tabIndice);
+	
+		/*
+		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1};
+		newThread("th4", 7, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5};
+		newThread("th6", 7, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1, 5};
+		newThread("th7", 8, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5, 1};
+		newThread("th8", 8, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1, 5, 1};
+		newThread("th7", 9, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5, 1, 5};
+		newThread("th8", 9, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1, 5, 1, 5};
+		newThread("th7", 10, 10, tabIndice);
+		
+		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5, 1, 5, 1};
+		newThread("th8", 10, 10, tabIndice);
+		*/
 		
 	}
 	

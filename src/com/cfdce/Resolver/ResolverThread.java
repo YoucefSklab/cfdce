@@ -90,11 +90,11 @@ public class ResolverThread implements Runnable {
 	public  int maxExperiment = 90000;
 	public  int maxRounds = 31;
 	public  int roundCounter = 1;
-	public  boolean displayComments = false;
+	public  boolean displayComments = true;
 	public  int experimentCounter = 1;
 	public  int experimentRoundCounter = 1;
 	
-	public MethodesCollection m = new MethodesCollection();
+
 	
 	
 	ResolverThread(String name, int nbrAgent, int totalPlans, int[] indiceTab){
@@ -139,9 +139,9 @@ public class ResolverThread implements Runnable {
 				resetExperimentParameters();
 
 				try {
-					agentList = MethColl.loadPlans(agentTab);
+					agentList = new MethodesCollection().loadPlans(agentTab);
 				} catch (IOException e) {e.printStackTrace();}
-				allTasksList = MethColl.getTasksList(agentList);
+				allTasksList = new MethodesCollection().getTasksList(agentList);
 
 				for (int i = 0; i < agentUtilityTime.length; i++) {
 					agentUtilityTime[i] = (double) ((double) ThreadLocalRandom.current().nextInt(minVal, maxVal) /  (double) utilityFactor);
@@ -152,12 +152,12 @@ public class ResolverThread implements Runnable {
 				// Initialisation
 				setTimeCounter();
 				try {
-					MethColl.formCoalitionsProposal(false, agentList);
+					new MethodesCollection().formCoalitionsProposal(false, agentList);
 				} catch (FIPAException | IOException e) {
 					e.printStackTrace();
 				}
-				MethColl.computeExclusiveTasks(false, agentList);
-				MethColl.setTasksExclusiveTasks(allTasksList, agentList);
+				new MethodesCollection().computeExclusiveTasks(false, agentList);
+				new MethodesCollection().setTasksExclusiveTasks(allTasksList, agentList);
 				updateElapsedTime();
 
 				// --------------------------------
@@ -180,7 +180,7 @@ public class ResolverThread implements Runnable {
 				boolean end = false;
 				while (!end) {
 					// display the experiment header
-					//displayRoundHeader();
+					displayRoundHeader();
 					setTimeCounter();
 
 					resetAgentsCoalitions();
@@ -200,13 +200,13 @@ public class ResolverThread implements Runnable {
 						uConsumedTime += agentUtilityTime[i];
 					}
 
-					MethColl.computeAgentGainedCost(agentList);
+					new MethodesCollection().computeAgentGainedCost(agentList);
 
-					float newEffeciency = MethColl.computeSystemEffeciency(agentList);
+					float newEffeciency = new MethodesCollection().computeSystemEffeciency(agentList);
 
 					if (newEffeciency > sysEffeciency) {
 						sysEffeciency = newEffeciency;
-						MethColl.setBestAlternative(agentList);
+						new MethodesCollection().setBestAlternative(agentList);
 					}
 
 					updateIndiceVectors();
@@ -215,7 +215,7 @@ public class ResolverThread implements Runnable {
 						end = true;
 					}
 
-					// MethColl.printAgentOnGraphs(agentList, finalNeededSteps);
+					// new MethodesCollection().printAgentOnGraphs(agentList, finalNeededSteps);
 
 					finalNeededSteps++;
 
@@ -264,7 +264,7 @@ public class ResolverThread implements Runnable {
 
 		System.out.println("Fin .....!!");
 
-		// MethColl.printSelectedDisc(agentList);
+		// new MethodesCollection().printSelectedDisc(agentList);
 	}
 
 	public  void updateElapsedTime() {
@@ -305,8 +305,8 @@ public class ResolverThread implements Runnable {
 
 			exclusiveList.add(itsExclusive);
 			
-			task.combPossibilities = m.formCoalitionStr(task.agentList, true);
-
+			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
+			
 			if (totalNbrAgentInSystem < task.agentList.size())
 				totalNbrAgentInSystem = task.agentList.size();
 
@@ -315,6 +315,7 @@ public class ResolverThread implements Runnable {
 			
 			indiceMin.add(0);
 			indiceMax.add(task.combPossibilities.size());
+			//indiceMax.add(new MethodesCollection().formCoalition(task.agentList).size());
 		}
 		
 		dependanceDistance = depIndice;
@@ -413,7 +414,7 @@ public class ResolverThread implements Runnable {
 		System.out.println();//
 		System.out.println();
 		System.out.println();
-		System.out.println();
+		System.out.println("-- "+threadName );
 		System.out.println(" - Step:" + finalNeededSteps);
 		System.out.println(" -> Tache: " + tasksList.toString());
 		System.out.println(" -> Indice Max: " + tempIndiceMax.toString() + " - Step:" + finalNeededSteps);
@@ -441,9 +442,9 @@ public class ResolverThread implements Runnable {
 			exploredTasks.add(task.task);
 			task.tasksExclusiveAgents.clear();
 			ArrayList liste = task.getPossibilitiesFromStr(tempIndiceMin.get(i));
-			MethColl.updateTaskExclusiveAgents(task.task, agentList, allTasksList, liste);
+			new MethodesCollection().updateTaskExclusiveAgents(task.task, agentList, allTasksList, liste);
 			if (liste.size() >= 2) { // ex�cution collective
-				MethColl.setCollectiveExecution(agentList, liste, task.task, allTasksList, selectedCommonTasks,
+				new MethodesCollection().setCollectiveExecution(agentList, liste, task.task, allTasksList, selectedCommonTasks,
 						exploredTasks);
 			}
 		}
@@ -510,8 +511,9 @@ public class ResolverThread implements Runnable {
 						newAgentList.add(agent);
 					}
 				}
-				task.combPossibilities = m.formUpdateCoalitionStr(newAgentList, true);
+				task.combPossibilities = new MethodesCollection().formUpdateCoalitionStr(newAgentList, true);
 				tempIndiceMax.set(h, task.combPossibilities.size());
+				
 			}
 		}
 	}

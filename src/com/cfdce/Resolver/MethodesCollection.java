@@ -315,8 +315,7 @@ public class MethodesCollection {
 		while (partSize < listSize) {
 
 			for( int o = 0; o < listeCoalition.size(); o++ ) {
-				ArrayList listEl = getArrayListFromStr(
-						(String) listeCoalition.get(o));
+				ArrayList listEl = getArrayListFromStr((String) listeCoalition.get(o));
 
 				int posi1 = listeElement.indexOf(listEl.get(0));
 				int posi2 = listeElement.indexOf(listEl.get(listEl.size() - 1));
