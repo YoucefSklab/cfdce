@@ -18,34 +18,35 @@ public class SimAsThreads  {
 		
 		for(int i=0; i<nbrThreads; i++) {
 			System.out.println("run the thread : "+i);
-			int[] indiceTab = new int[ThreadLocalRandom.current().nextInt(3, 10)];
+			int[] indiceTab = new int[ThreadLocalRandom.current().nextInt(6, 11)];
 			Arrays.fill(indiceTab,1);
 		    newThread("Thread_"+i, 10, 10, indiceTab);
 		}
 		
+		
 		/*
 		int[] tabIndice = { 5, 1, 5, 1, 5};
-		//newThread("th1", 5, 10, tabIndice);
+		newThread("th1", 5, 10, tabIndice);
 		
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5};
 		newThread("th2", 6, 10, tabIndice);
 		
-		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1};
-		newThread("th3", 6, 10, tabIndice);
+		//tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1};
+		//newThread("th3", 6, 10, tabIndice);
 	
-		/*
+		
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1};
 		newThread("th4", 7, 10, tabIndice);
 		
-		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5};
-		newThread("th6", 7, 10, tabIndice);
+		//tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5};
+		//newThread("th6", 7, 10, tabIndice);
 		
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1, 5};
 		newThread("th7", 8, 10, tabIndice);
-		
-		tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5, 1};
-		newThread("th8", 8, 10, tabIndice);
-		
+		*/
+		//tabIndice =  new int[]  { 5, 1, 5, 1, 5, 1, 5, 1};
+		//newThread("th8", 8, 10, tabIndice);
+		/*
 		tabIndice =  new int[]  { 1, 5, 1, 5, 1, 5, 1, 5, 1};
 		newThread("th7", 9, 10, tabIndice);
 		

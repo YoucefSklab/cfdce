@@ -27,7 +27,9 @@ public class ResolverThread implements Runnable {
 	private Thread t;
 	private String threadName;
 	// needed parameters per round
-	public  long totalNbrAgentInSystem = 0;
+	public  long MaxAgentForTask = 0;
+	public  long WPAg = 0;
+	public  long WMAg = 1;
 	public  long initialNeededSteps = 1;
 	public  int nbrV = 0;
 	public  double totalTeT = 1;
@@ -36,10 +38,12 @@ public class ResolverThread implements Runnable {
 	public  double finalNeededSteps = 1;
 	public  double dependanceDistance = 0;
 
-	public  double[] exhaustifMean = new double[30];
-	public  double[] uTotalMean = new double[30];
-	public  double[] uMean = new double[30];
-	public  double[] elapsedTimeMean = new double[30];
+	public  int maxRounds = 2;
+	
+	public  double[] exhaustifMean = new double[maxRounds - 1 ];
+	public  double[] uTotalMean = new double[maxRounds - 1];
+	public  double[] uMean = new double[maxRounds - 1];
+	public  double[] elapsedTimeMean = new double[maxRounds - 1];
 
 	public  Random rand = new Random();
 	public  ArrayList<AgentModel> agentList = new ArrayList<AgentModel>();
@@ -88,19 +92,19 @@ public class ResolverThread implements Runnable {
 	public  int[] indiceTab = null;
 	
 	public  int maxExperiment = 90000;
-	public  int maxRounds = 31;
+	
 	public  int roundCounter = 1;
 	public  boolean displayComments = true;
 	public  int experimentCounter = 1;
 	public  int experimentRoundCounter = 1;
-	
+	public int agNbr = 7;
 
 	
 	
 	ResolverThread(String name, int nbrAgent, int totalPlans, int[] indiceTab){
 		this.nbrAgents = nbrAgent;
 		this.totalPlans = totalPlans;
-		this.threadName = name;
+		this.threadName = agNbr+"_Accumulative_Agents_"+name;
 		this.indiceTab = indiceTab;
 		this.agentTab = indiceTab;
 	}
@@ -125,12 +129,15 @@ public class ResolverThread implements Runnable {
 		
 		System.out.println(getExperimentMeanValuesTitle());
 		while (experimentCounter < maxExperiment) {
-			minVal =50;
-			maxVal =500;
+			minVal =ThreadLocalRandom.current().nextInt(20, 50);
+			maxVal =ThreadLocalRandom.current().nextInt(60, 500);
 			utilityFactor = 20000;
 			
 			experimentRoundCounter = 1;
 			//agentTab = getNewAgentsSet(totalPlans, nbrAgents);//getNewAgentsSet(1, 11, 3) ;
+			agentTab = new int[ThreadLocalRandom.current().nextInt(5, 11)];
+			agentTab = new int[agNbr];
+			agentUtilityTime = new double[agentTab.length];
 			agentTab = getNewRundomAgentsSet(agentTab, 2, 800);
 			//System.out.println("Agents set: "+Arrays.toString(agentTab));
 			System.out.println(getExperimentTitle());
@@ -200,6 +207,7 @@ public class ResolverThread implements Runnable {
 								e.printStackTrace();
 							}
 						}
+						if(i+1<agentUtilityTime.length)
 						uConsumedTime += agentUtilityTime[i];
 					}
 
@@ -310,8 +318,13 @@ public class ResolverThread implements Runnable {
 			
 			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 			
-			if (totalNbrAgentInSystem < task.agentList.size())
-				totalNbrAgentInSystem = task.agentList.size();
+			if (MaxAgentForTask < task.agentList.size())
+				MaxAgentForTask = task.agentList.size();
+			
+			if(task.agentList.size() > 1){
+				WPAg+= task.agentList.size();
+				WMAg*= task.agentList.size();
+			}
 
 			depIndice += task.agentList.size() * task.exclusiveTasks.size();
 			//System.out.println("task : "+task.task + " task.agentList.size()  : "+task.agentList.size() + " task.exclusiveTasks.size() : "+task.exclusiveTasks.size());
@@ -405,7 +418,7 @@ public class ResolverThread implements Runnable {
 		System.out.println(" 	-> setV: " + nbrV);
 		System.out.println(" 	-> Total TeT: " + totalTeT);
 		System.out.println(" 	-> Indice du plan : " + indiceDep);
-		System.out.println(" 	-> nbr Agent : " + totalNbrAgentInSystem);
+		System.out.println(" 	-> Max Agent : " + MaxAgentForTask);
 		System.out.println("    -> Initial Max Vector: " + indiceMax.toString());
 		System.out.println(" --> Final System Effeciency: " + sysEffeciency);
 		System.out.println(" --> Les coalitions retenues: ");
@@ -541,20 +554,20 @@ public class ResolverThread implements Runnable {
 
 	public  void displayRoundReasults() {
 		System.out.println(
-				"Initial needed steps, Final Steps, setV, Total TeT, Indice du plan, nbr Agent, consumed Time (ms), total agent utility time, utility consumed time (ms), time exhaustif search ");
+				"Initial needed steps, Final Steps, setV, Total TeT, Indice du plan, Max Agent, WPAg, WMAg, consumed Time (ms), total agent utility time, utility consumed time (ms), time exhaustif search ");
 
 		System.out.println("" + initialNeededSteps + " , " + finalNeededSteps + " , " + nbrV + " , " + totalTeT + " , "
-				+ indiceDep + " , " + totalNbrAgentInSystem + " , " + (double) (globalElapsedTime) + " , "
+				+ indiceDep + " , " + MaxAgentForTask + " , " + WPAg + " , " + WMAg+ " , " + (double) (globalElapsedTime) + " , "
 				+ totalAgentUtilityTime + " , " + uConsumedTime + " , "
 				+ (double) (initialNeededSteps * totalAgentUtilityTime));
 	}
 
 	public  String getExperimentTitle() {
-		return "Exp, Rnd, InitialSteps, FinalSteps, nbrV, nbrAg, dependanceDistance, T (ms), Total ag Utility Time, Util consumed T (ms), Time exhaustif search, difference in time ";
+		return "Exp, Rnd, InitialSteps, FinalSteps, nbrV, MaxAg, WPAg, WMAg, dependanceDistance, T (ms), Total ag Utility Time, Util consumed T (ms), Time exhaustif search, difference in time ";
 	}
 	public  String getRoundResultValues() {
-		return String.format("%3s, %3s, %12s, %10s, %4s, %5s, %18s, %6s, %21s, %20s, %20s, %20s", 
-				experimentCounter, experimentRoundCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, totalNbrAgentInSystem, (double) dependanceDistance,
+		return String.format("%3s, %3s, %12s, %10s, %4s, %5s,, %5s, %5s %18s, %6s, %21s, %20s, %20s, %20s", 
+				experimentCounter, experimentRoundCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, MaxAgentForTask, WPAg, WMAg, (double) dependanceDistance,
 				(double) (globalElapsedTime), (double) totalAgentUtilityTime,  (double) uConsumedTime, (double) (initialNeededSteps * totalAgentUtilityTime),
 				(double) ((double) (initialNeededSteps * totalAgentUtilityTime) - (double) ((double) (globalElapsedTime) + (double) uConsumedTime) ));
 	}
@@ -566,24 +579,26 @@ public class ResolverThread implements Runnable {
 	
 	
 	public  String getExperimentMeanValuesTitle() {
-		return "Exp, InitialSteps, FinalSteps, nbrV, nbrAg, minVal, maxVal, Dependance  Distance, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time";
+		return "Exp, InitialSteps, FinalSteps, nbrV, nbrAg, WPAg, WMAg, minVal, maxVal, Dependance  Distance, utilityFactor, exhaustifMeanValue, utility TotalMeanValue, utility  Mean  Value, elapsedTimeMeanValue, All T(MeanV+elapsed), difference in time";
 	}
 	public  String getExperimentMeanValues() {
-		return String.format("%3s, %12s, %10s, %4s, %5s, %6s, %6s, %20s, %13s, %18s, %22s, %20s, %20s, %20s, %20s", 
-				experimentCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, totalNbrAgentInSystem,  
+		return String.format("%3s, %12s, %10s, %4s, %5s, %5s, %5s, %6s, %6s, %20s, %13s, %18s, %22s, %20s, %20s, %20s, %20s", 
+				experimentCounter, (double) initialNeededSteps, finalNeededSteps, nbrV, MaxAgentForTask, WPAg, WMAg,   
 				minVal, maxVal,(double) dependanceDistance, (int) utilityFactor, (double) exhaustifMeanvalue, (double) uTotalMeanValue, (double) uMeanValue, (double) elapsedTimeMeanValue, (double)(uMeanValue + elapsedTimeMeanValue), (double) (exhaustifMeanvalue - (uMeanValue + elapsedTimeMeanValue))  );
 	}
 	
 	public  void displayMiniRoundReasults() {
-		System.out.println("Exp, Rnd, IniSteps, FinSteps, V, nbrAg, T (ms), Tot U T, U consumed T (ms), T exhaustif search ");
+		System.out.println("Exp, Rnd, IniSteps, FinSteps, V, MaxAg, WPAg, WMAg, T (ms), Tot U T, U consumed T (ms), T exhaustif search ");
 
 		System.out.println("" + experimentCounter  + " , " + experimentRoundCounter + " , " + (double) initialNeededSteps + " , " + finalNeededSteps + " , " + nbrV + " , "
-				+ totalNbrAgentInSystem + " , " + (double) (globalElapsedTime) + " , " + (double) totalAgentUtilityTime
+				+ MaxAgentForTask + " , " + WPAg +" , " + WMAg + " , " + (double) (globalElapsedTime) + " , " + (double) totalAgentUtilityTime
 				+ " , " + (double) uConsumedTime + " , " + (double) (initialNeededSteps * totalAgentUtilityTime));
 	}
 
 	public  void resetExperimentParameters() {
-		totalNbrAgentInSystem = 0;
+		MaxAgentForTask = 0;
+		WPAg = 0;
+		WMAg = 1;
 		initialNeededSteps = 1;
 		nbrV = 0;
 		totalTeT = 1;
@@ -624,10 +639,10 @@ public class ResolverThread implements Runnable {
 	}
 
 	public  void resetExperimentMeansVariables() {
-		exhaustifMean = new double[30];
-		uTotalMean = new double[30];
-		uMean = new double[30];
-		elapsedTimeMean = new double[30];
+		exhaustifMean = new double[maxRounds - 1];
+		uTotalMean = new double[maxRounds - 1];
+		uMean = new double[maxRounds - 1];
+		elapsedTimeMean = new double[maxRounds - 1];
 	}
 
 	public  void collectMeansValueses(int round) {
@@ -638,17 +653,17 @@ public class ResolverThread implements Runnable {
 	}
 
 	public  void computeExperimentMeansVariables() {
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < maxRounds - 1; i++) {
 			exhaustifMeanvalue += exhaustifMean[i];
 			uTotalMeanValue += uTotalMean[i];
 			uMeanValue += uMean[i];
 			elapsedTimeMeanValue += elapsedTimeMean[i];
 		}
 
-		exhaustifMeanvalue = (double) ((double)  exhaustifMeanvalue / (double)  30);
-		uTotalMeanValue = (double) ((double)  uTotalMeanValue / (double)  30);
-		uMeanValue = (double) ((double)  uMeanValue / (double)  30);
-		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  30);
+		exhaustifMeanvalue = (double) ((double)  exhaustifMeanvalue / (double)  maxRounds - 1);
+		uTotalMeanValue = (double) ((double)  uTotalMeanValue / (double)  maxRounds - 1);
+		uMeanValue = (double) ((double)  uMeanValue / (double)  maxRounds - 1);
+		elapsedTimeMeanValue = (double) ((double)  elapsedTimeMeanValue / (double)  maxRounds - 1);
 	}
 	
 	

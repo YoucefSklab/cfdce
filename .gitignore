@@ -1,2 +1,4 @@
 
 *.class
+src/com/.DS_Store
+.DS_Store
