@@ -14,7 +14,7 @@ public class SimAsThreads  {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int nbrThreads = 10;
+		int nbrThreads = 10; 
 		
 		for(int i=0; i<nbrThreads; i++) {
 			System.out.println("run the thread : "+i);
