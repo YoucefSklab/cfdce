@@ -28,6 +28,7 @@ public class ResolverThread implements Runnable {
 	private String threadName;
 	// needed parameters per round
 	public  long MaxAgentForTask = 0;
+	public ArrayList<Integer> negotiatingAgentsList = new ArrayList<Integer>();
 	public  long WPAg = 0;
 	public  long WMAg = 1;
 	public  long initialNeededSteps = 1;
@@ -97,14 +98,14 @@ public class ResolverThread implements Runnable {
 	public  boolean displayComments = true;
 	public  int experimentCounter = 1;
 	public  int experimentRoundCounter = 1;
-	public int agNbr = 7;
+	public int agNbr = 3;
 
 	
 	
 	ResolverThread(String name, int nbrAgent, int totalPlans, int[] indiceTab){
 		this.nbrAgents = nbrAgent;
 		this.totalPlans = totalPlans;
-		this.threadName = agNbr+"_Accumulative_Agents_"+name;
+		this.threadName = agNbr+"_Accumu_Good_Ag_"+name;
 		this.indiceTab = indiceTab;
 		this.agentTab = indiceTab;
 	}
@@ -318,8 +319,17 @@ public class ResolverThread implements Runnable {
 			
 			task.combPossibilities = new MethodesCollection().formCoalitionStr(task.agentList, true);
 			
-			if (MaxAgentForTask < task.agentList.size())
-				MaxAgentForTask = task.agentList.size();
+			if (task.agentList.size() > 0) {
+				for(int m=0; m<task.agentList.size(); m++) {
+					int agent = (int) task.agentList.get(m);
+					if(!negotiatingAgentsList.contains(agent))
+					{
+						negotiatingAgentsList.add(agent);
+					}				
+				}
+				MaxAgentForTask = negotiatingAgentsList.size();
+			}
+				
 			
 			if(task.agentList.size() > 1){
 				WPAg+= task.agentList.size();
