@@ -15,6 +15,7 @@ import com.cfdce.FormationCoalitions.Discussion;
 
 import jade.domain.FIPAException;
 
+
 /**
  * @author Djo
  *

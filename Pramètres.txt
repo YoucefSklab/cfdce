@@ -1,41 +1,41 @@
-TODO: 
+TODO:  
 
-	- Ajouter le facteur de concession qui sera en fonction du temps limité, de la nature des plans ainsi que les propoisitions des autres agents.
+	- Ajouter le facteur de concession qui sera en fonction du temps limitï¿½, de la nature des plans ainsi que les propoisitions des autres agents.
 
 
 Version : 0.4.2
-Pramètres : 	
-	- 08 stratégies d'ordonnancement des alternatives. 
-	- Amélioration de la relance sur les discussions (mais il y a toujours des problèmes à résoudre)
+Pramï¿½tres : 	
+	- 08 stratï¿½gies d'ordonnancement des alternatives. 
+	- Amï¿½lioration de la relance sur les discussions (mais il y a toujours des problï¿½mes ï¿½ rï¿½soudre)
 	
 	
-Détails : 
+Dï¿½tails : 
 	- Version avec relancement 
-	- Les agents ne s'engagent pas avec un coût négatif.
+	- Les agents ne s'engagent pas avec un coï¿½t nï¿½gatif.
 version DB : bd1
 Objectifs courants : 
-	- 	Ajouter une autre stratégie basée sur le nombre de bifurcation dans les alternatives des agents.
+	- 	Ajouter une autre stratï¿½gie basï¿½e sur le nombre de bifurcation dans les alternatives des agents.
 	
 To Do :
-	- Enregistrer le round sur lequel une solution est trouvé
-	- Enregistrer la stratégie utilisée
-	- Enregistrer la distance sur la base de données
-	- Enregistrer les bifurcations sur la base de données.
-	- Revoir le relancement V2. (Relancer sans remise à zéro des listes)(En partie Fait)
+	- Enregistrer le round sur lequel une solution est trouvï¿½
+	- Enregistrer la stratï¿½gie utilisï¿½e
+	- Enregistrer la distance sur la base de donnï¿½es
+	- Enregistrer les bifurcations sur la base de donnï¿½es.
+	- Revoir le relancement V2. (Relancer sans remise ï¿½ zï¿½ro des listes)(En partie Fait)
 	- Relancer les discussion sur l'ensemble des alternatives possibles (Fait).
-	- Ajouter la prise en considération des temps de validités des acceptations (Fait).
-	- Ajouter une stratégie qui prendera en compte le degrée des actions (le degrée étant le nombre d'agent l'ayant sur leur plan) (En Partie Fait)
+	- Ajouter la prise en considï¿½ration des temps de validitï¿½s des acceptations (Fait).
+	- Ajouter une stratï¿½gie qui prendera en compte le degrï¿½e des actions (le degrï¿½e ï¿½tant le nombre d'agent l'ayant sur leur plan) (En Partie Fait)
 	- Enregistrer les propositions des atres agents
 	
 	
 To Do 2 
-	- Calculer le gain estimé moyen par agent.	
+	- Calculer le gain estimï¿½ moyen par agent.	
 	- 
 	- 
 
 Perspectives : 
-	- Construire les réponse d'acceptation en fonction de la totalité des propositions reçues des agents.
-	- Utiliser la notion de distance pour selectionner l'alternative. Pas la distance par rapport au plan global, mais la distance par rapport aux propositions reçues.
-	- Donc, toutes les métriques des stratégies peuvent s'appliquer dans ce sense. Distance, cout, degré, bifurcation.... 
-	- Une npuvelle stratégie : calculer le degré des agents (le nombre d'action en commun), puis par ordre décroissant, choisir les alternatives qui comportes ces agents.
+	- Construire les rï¿½ponse d'acceptation en fonction de la totalitï¿½ des propositions reï¿½ues des agents.
+	- Utiliser la notion de distance pour selectionner l'alternative. Pas la distance par rapport au plan global, mais la distance par rapport aux propositions reï¿½ues.
+	- Donc, toutes les mï¿½triques des stratï¿½gies peuvent s'appliquer dans ce sense. Distance, cout, degrï¿½, bifurcation.... 
+	- Une npuvelle stratï¿½gie : calculer le degrï¿½ des agents (le nombre d'action en commun), puis par ordre dï¿½croissant, choisir les alternatives qui comportes ces agents.
 	
